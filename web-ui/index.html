@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ thống dẫn đường khuôn viên UTC2 | Campus Navigation</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="header-logo">U2</div>
+        <div class="header-title">
+          <h1>HỆ THỐNG DẪN ĐƯỜNG KHUÔN VIÊN UTC2</h1>
+          <p>
+            Bài tập lớn Cấu trúc dữ liệu & Giải thuật | Trường ĐH Giao thông Vận
+            tải - Phân hiệu tại TP.HCM
+          </p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- Nút So sánh giải thuật -->
+        <button
+          type="button"
+          id="btnOpenBenchmark"
+          class="btn-benchmark-toggle"
+          title="So sánh hiệu năng Dijkstra vs Bellman-Ford vs Prim"
+        >
+          <span>⚡ So sánh giải thuật</span>
+        </button>
+        <div class="server-status">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Standalone</span>
+        </div>
+        <!-- Khung thông tin Sinh viên đăng nhập & Nút Đăng xuất -->
+        <div
+          class="user-profile-badge"
+          id="userProfileBadge"
+          style="display: none"
+        >
+          <span class="user-avatar">🎓</span>
+          <div class="user-info-text">
+            <span class="user-name" id="headerUserName">Sinh viên</span>
+            <span class="user-mssv" id="headerUserMssv">MSSV: ---</span>
+          </div>
+          <button
+            type="button"
+            id="btnLogout"
+            class="btn-logout"
+            title="Đăng xuất khỏi hệ thống"
+          >
+            <span>Đăng xuất</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- App Main Container -->
+    <main class="app-container">
+      <!-- Left Sidebar: Controls & Turn-by-turn Results -->
+      <aside class="app-sidebar">
+        <div class="sidebar-content">
+          <!-- Navigation Mode Tabs -->
+          <nav class="nav-tabs">
+            <button type="button" class="nav-tab active" data-tab="tab-single">
+              <span>🧭 Tìm đường</span>
+            </button>
+            <button type="button" class="nav-tab" data-tab="tab-multi">
+              <span>🗺️ Lộ trình đa điểm</span>
+            </button>
+            <button type="button" class="nav-tab" data-tab="tab-schedule">
+              <span>⚡ Kiểm tra kịp giờ</span>
+            </button>
+          </nav>
+
+          <!-- TAB 1: TÌM ĐƯỜNG ĐƠN (DIJKSTRA) -->
+          <div id="tab-single" class="tab-pane active">
+            <section class="card">
+              <h2 class="card-title"><span>🧭</span> Thiết lập lộ trình</h2>
+
+              <!-- Origin Selection -->
+              <div class="form-group">
+                <label class="form-label" for="startSelect"
+                  >Điểm xuất phát:</label
+                >
+                <select id="startSelect" class="form-select">
+                  <option value="G" selected>Cổng số 451</option>
+                </select>
+              </div>
+
+              <!-- Destination Selection -->
+              <div class="form-group">
+                <label class="form-label" for="endSelect"
+                  >Điểm đến (Tòa nhà / Phòng chức năng):</label
+                >
+                <select id="endSelect" class="form-select">
+                  <!-- Populated dynamically by app.js -->
+                </select>
+              </div>
+
+              <!-- Blocked Edges Section -->
+              <div class="form-group">
+                <label class="form-label"
+                  >Cung đường tạm chặn (Công trường / Sự kiện):</label
+                >
+                <div class="blocked-grid">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="T-J"
+                    />
+                    <span>Lối sau Cổng sang Cụm C (sau Nhà C2)</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="W1-H1"
+                    />
+                    <span>Đường Hội nhập Tây</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="H1-H2"
+                    />
+                    <span>Đường Hội nhập (Trước Giảng đường Đa năng)</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="Q-R2"
+                    />
+                    <span>Đường nội bộ sau Cụm E</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="J-K"
+                    />
+                    <span>Lối vào Nhà C2 (Sảnh sau)</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="blocked-checkbox"
+                      value="H3-HP"
+                    />
+                    <span>Lối vào Nhà để xe</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="button-row">
+                <button type="button" id="btnFindRoute" class="btn btn-primary">
+                  <span>🔍 Tìm đường tối ưu</span>
+                </button>
+                <button
+                  type="button"
+                  id="btnReset"
+                  class="btn btn-secondary"
+                  title="Đặt lại về mặc định"
+                >
+                  <span>⟲ Đặt lại</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <!-- TAB 2: LỘ TRÌNH ĐA ĐIỂM (MULTI-STOP) -->
+          <div id="tab-multi" class="tab-pane">
+            <section class="card">
+              <h2 class="card-title">
+                <span>🗺️</span> Lộ trình ghé nhiều điểm
+              </h2>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-secondary);
+                  margin-bottom: 12px;
+                "
+              >
+                Hệ thống tự động dùng
+                <strong>Vét cạn (&le; 5 điểm)</strong> hoặc
+                <strong>Nearest Neighbor</strong> để sắp xếp thứ tự ghé thăm
+                ngắn nhất.
+              </p>
+
+              <!-- Multi-stop Origin -->
+              <div class="form-group">
+                <label class="form-label" for="multiStartSelect"
+                  >Điểm xuất phát ban đầu:</label
+                >
+                <select id="multiStartSelect" class="form-select">
+                  <option value="G" selected>Cổng số 451</option>
+                  <option value="C2">Nhà C2</option>
+                  <option value="PZ">Nhà để xe</option>
+                  <option value="CT">Căn tin sinh viên</option>
+                  <option value="C1">Nhà C1</option>
+                </select>
+              </div>
+
+              <!-- Quick Chips Selector -->
+              <div class="form-group">
+                <label class="form-label">Chọn nhanh các điểm cần ghé:</label>
+                <div class="chip-grid" id="chipGrid">
+                  <span class="stop-chip" data-id="CT"
+                    >☕ Căn tin sinh viên</span
+                  >
+                  <span class="stop-chip" data-id="C2">🏫 Nhà C2</span>
+                  <span class="stop-chip" data-id="C1">🏛️ Nhà C1</span>
+                  <span class="stop-chip" data-id="DN"
+                    >🏢 Giảng đường Đa Năng</span
+                  >
+                  <span class="stop-chip" data-id="E7">🔬 Nhà E7</span>
+                  <span class="stop-chip" data-id="E1">💻 Nhà E1</span>
+                  <span class="stop-chip" data-id="E3">🎓 Nhà E3</span>
+                  <span class="stop-chip" data-id="E4">🎓 Nhà E4</span>
+                  <span class="stop-chip" data-id="E5">🎓 Nhà E5</span>
+                  <span class="stop-chip" data-id="E6_W">🏢 Nhà E6</span>
+                  <span class="stop-chip" data-id="D0">🏢 Nhà E9</span>
+                  <span class="stop-chip" data-id="E8">⚙️ Nhà E8</span>
+                  <span class="stop-chip" data-id="PZ">🏍️ Nhà để xe</span>
+                  <span class="stop-chip" data-id="V4_S">📚 Nhà C3</span>
+                  <span class="stop-chip" data-id="E10">🏢 Nhà E10</span>
+                </div>
+              </div>
+
+              <!-- Dropdown to Add Any Other Node -->
+              <div class="form-group">
+                <label class="form-label" for="addStopSelect"
+                  >Thêm địa điểm bất kỳ:</label
+                >
+                <div style="display: flex; gap: 6px">
+                  <select
+                    id="addStopSelect"
+                    class="form-select"
+                    style="flex: 1"
+                  >
+                    <!-- Populated dynamically -->
+                  </select>
+                  <button
+                    type="button"
+                    id="btnAddCustomStop"
+                    class="btn btn-secondary"
+                    style="padding: 0 14px"
+                  >
+                    + Thêm
+                  </button>
+                </div>
+              </div>
+
+              <!-- Selected Stops Display List -->
+              <div class="form-group">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <label class="form-label" style="margin-bottom: 0"
+                    >Danh sách điểm cần ghé:</label
+                  >
+                  <button
+                    type="button"
+                    id="btnClearStops"
+                    style="
+                      background: none;
+                      border: none;
+                      color: #ef4444;
+                      font-size: 0.78rem;
+                      cursor: pointer;
+                    "
+                  >
+                    Xóa hết
+                  </button>
+                </div>
+                <div class="selected-stops-list" id="selectedStopsList">
+                  <div
+                    style="
+                      color: var(--text-muted);
+                      font-size: 0.8rem;
+                      padding: 6px 0;
+                    "
+                  >
+                    Chưa chọn điểm ghé nào. Vui lòng bấm vào các thẻ phía trên.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Multi-stop Action Buttons -->
+              <div class="button-row">
+                <button
+                  type="button"
+                  id="btnFindMultiStop"
+                  class="btn btn-primary"
+                >
+                  <span>🚀 Tối ưu lộ trình đa điểm</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <!-- TAB 3: THỜI KHÓA BIỂU (SCHEDULE OPTIMIZER) -->
+          <div id="tab-schedule" class="tab-pane">
+            <section class="card">
+              <h2 class="card-title"><span>🚶</span> Đổi phòng học</h2>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-secondary);
+                  margin-bottom: 12px;
+                "
+              >
+                Tính toán thời gian đi bộ giữa 2 phòng học liên tiếp và đưa ra
+                <strong>cảnh báo đỏ</strong> nếu vượt quá giờ nghỉ ra chơi.
+              </p>
+
+              <!-- Room 1 -->
+              <div class="form-group">
+                <label class="form-label" for="scheduleRoom1"
+                  >Phòng học Tiết trước:</label
+                >
+                <select id="scheduleRoom1" class="form-select">
+                  <option value="C2" selected>Nhà C2</option>
+                  <option value="C1">Nhà C1</option>
+                  <option value="V4_S">Nhà C3</option>
+                  <option value="DN">Giảng đường Đa Năng</option>
+                  <option value="E7">Nhà E7</option>
+                  <option value="E1">Nhà E1</option>
+                  <option value="E3">Nhà E3</option>
+                  <option value="E4">Nhà E4</option>
+                  <option value="E5">Nhà E5</option>
+                  <option value="E6_W">Nhà E6</option>
+                  <option value="D0">Nhà E9</option>
+                  <option value="E8">Nhà E8</option>
+                  <option value="E10">Nhà E10</option>
+                  <option value="CT">Căn tin sinh viên</option>
+                  <option value="PZ">Nhà để xe</option>
+                  <option value="G">Cổng số 451</option>
+                </select>
+              </div>
+
+              <!-- Room 2 -->
+              <div class="form-group">
+                <label class="form-label" for="scheduleRoom2"
+                  >Phòng học Tiết sau:</label
+                >
+                <select id="scheduleRoom2" class="form-select">
+                  <option value="C1" selected>Nhà C1</option>
+                  <option value="C2">Nhà C2</option>
+                  <option value="V4_S">Nhà C3</option>
+                  <option value="DN">Giảng đường Đa Năng</option>
+                  <option value="E7">Nhà E7</option>
+                  <option value="E1">Nhà E1</option>
+                  <option value="E3">Nhà E3</option>
+                  <option value="E4">Nhà E4</option>
+                  <option value="E5">Nhà E5</option>
+                  <option value="E6_W">Nhà E6</option>
+                  <option value="D0">Nhà E9</option>
+                  <option value="E8">Nhà E8</option>
+                  <option value="E10">Nhà E10</option>
+                  <option value="CT">Căn tin sinh viên</option>
+                  <option value="PZ">Nhà để xe</option>
+                </select>
+              </div>
+
+              <!-- Break Time Input -->
+              <div class="form-group">
+                <label class="form-label" for="scheduleBreakTime"
+                  >Thời gian giải lao ra chơi:</label
+                >
+                <div style="display: flex; gap: 8px">
+                  <select
+                    id="scheduleBreakTime"
+                    class="form-select"
+                    style="flex: 1"
+                  >
+                    <option value="180">3 phút (180 giây - Nghỉ ngắn)</option>
+                    <option value="300" selected>
+                      5 phút (300 giây - Nghỉ chuẩn)
+                    </option>
+                    <option value="600">10 phút (600 giây - Nghỉ dài)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <div class="button-row">
+                <button
+                  type="button"
+                  id="btnCheckSchedule"
+                  class="btn btn-primary"
+                >
+                  <span>⏱️ Kiểm tra thời gian chuyển tiết</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <!-- Navigation Results Card -->
+          <section class="card result-card" id="resultCard">
+            <h2 class="card-title">
+              <span>📍</span> Kết quả chỉ đường & Hướng dẫn
+            </h2>
+
+            <!-- Schedule Alert Badge (If Schedule mode active) -->
+            <div
+              id="scheduleAlertBadge"
+              style="display: none"
+              class="schedule-alert-box"
+            >
+              <div class="alert-header">
+                <span id="scheduleAlertIcon">⚠️</span>
+                <span id="scheduleAlertStatus">NGUY CƠ TRỄ HỌC</span>
+              </div>
+              <div class="alert-desc" id="scheduleAlertMessage">
+                <!-- Alert message inserted dynamically -->
+              </div>
+            </div>
+
+            <!-- Multi-stop Order Badge -->
+            <div
+              id="multiStopBadge"
+              style="display: none"
+              class="schedule-alert-box success"
+            >
+              <div class="alert-header">
+                <span>🚀</span>
+                <span id="multiStopAlgo">Vét cạn tối ưu (Brute-force)</span>
+              </div>
+              <div class="alert-desc" id="multiStopOrder">
+                Thứ tự ghé thăm: G &rarr; CT &rarr; E3 &rarr; E7
+              </div>
+            </div>
+
+            <!-- Distance & Time Summary -->
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-value" id="statDistance">0 m</div>
+                <div class="stat-label">Tổng chiều dài</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="statTime">0s</div>
+                <div class="stat-label">Thời gian đi bộ (~1.2m/s)</div>
+              </div>
+            </div>
+
+            <!-- Door Selection Badge (For Dual-entry E3, E4, E5) -->
+            <div class="door-badge" id="doorBadge" style="display: none">
+              🚪 Cửa vào tối ưu: <strong>E3w</strong>
+            </div>
+
+            <!-- Turn-by-turn Step List -->
+            <label class="form-label" style="margin-top: 10px"
+              >Hướng dẫn rẽ từng bước (Voice / Arrows):</label
+            >
+            <div class="directions-list" id="directionsList">
+              <!-- Populated by app.js with icons and details -->
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <!-- Right Viewport: Interactive Map Canvas -->
+      <section class="map-viewport">
+        <!-- Floating Zoom/Pan Controls -->
+        <div class="map-toolbar">
+          <button
+            type="button"
+            class="toolbar-btn"
+            id="btnZoomIn"
+            title="Phóng to"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            id="btnZoomOut"
+            title="Thu nhỏ"
+          >
+            −
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            id="btnFitRoute"
+            title="Căn chỉnh theo lộ trình"
+          >
+            🎯
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            id="btnResetView"
+            title="Về vị trí mặc định"
+          >
+            ⟲
+          </button>
+        </div>
+
+        <!-- Canvas Element -->
+        <canvas id="mapCanvas"></canvas>
+
+        <!-- Map Legend -->
+        <div class="map-legend">
+          <div class="legend-item">
+            <div class="legend-color start"></div>
+            <span>Điểm xuất phát</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color end"></div>
+            <span>Điểm đến (nhấp nháy)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color path"></div>
+            <span>Lộ trình ngắn nhất (glow)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color blocked"></div>
+            <span>Cung đường bị chặn</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ SINH VIÊN (MSSV) -->
+    <div class="auth-modal-overlay active" id="authModal">
+      <div class="auth-modal-card">
+        <div class="auth-header">
+          <div class="auth-brand">
+            <div class="auth-logo">U2</div>
+            <div>
+              <h2>CỔNG THÔNG TIN SINH VIÊN UTC2</h2>
+              <p>
+                Đăng nhập bằng MSSV để sử dụng Hệ thống Dẫn đường & Tra cứu Thời
+                khóa biểu
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab-btn active" id="tabBtnLogin">
+            <span>🔑 Đăng nhập</span>
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabBtnRegister">
+            <span>📝 Đăng ký tài khoản</span>
+          </button>
+        </div>
+
+        <!-- Alert Box -->
+        <div class="auth-alert" id="authAlert" style="display: none"></div>
+
+        <!-- FORM ĐĂNG NHẬP -->
+        <form id="formLogin" class="auth-form active">
+          <div class="form-group">
+            <label class="form-label" for="loginMssv"
+              >Mã số sinh viên (MSSV):</label
+            >
+            <input
+              type="text"
+              id="loginMssv"
+              class="form-input"
+              placeholder="Ví dụ: 6351071001"
+              required
+              autocomplete="username"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Mật khẩu:</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-input"
+              placeholder="Nhập mật khẩu"
+              required
+              autocomplete="current-password"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            id="btnSubmitLogin"
+          >
+            <span>🚀 Đăng nhập hệ thống</span>
+          </button>
+
+          <div class="auth-demo-box">
+            <span
+              style="
+                font-size: 0.76rem;
+                color: var(--text-secondary);
+                font-weight: 600;
+              "
+              >Tài khoản sinh viên demo (click để điền nhanh):</span
+            >
+            <div class="demo-chips">
+              <button
+                type="button"
+                class="btn-demo-fill"
+                data-mssv="6351071001"
+                data-pass="123456"
+              >
+                👤 Nguyễn văn An (6651071000)
+              </button>
+              <button
+                type="button"
+                class="btn-demo-fill"
+                data-mssv="6351071002"
+                data-pass="123456"
+              >
+                👤 Trần Thị Mai (6789654124)
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- FORM ĐĂNG KÝ -->
+        <form id="formRegister" class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="regFullName"
+              >Họ và tên sinh viên:</label
+            >
+            <input
+              type="text"
+              id="regFullName"
+              class="form-input"
+              placeholder="Ví dụ: Lê Hoàng Nam"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regMssv"
+              >Mã số sinh viên (MSSV):</label
+            >
+            <input
+              type="text"
+              id="regMssv"
+              class="form-input"
+              placeholder="Ví dụ: 6351071099"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regClass">Lớp / Ngành học:</label>
+            <input
+              type="text"
+              id="regClass"
+              class="form-input"
+              placeholder="Ví dụ: CNTT K63"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Mật khẩu:</label>
+            <input
+              type="password"
+              id="regPassword"
+              class="form-input"
+              placeholder="Tạo mật khẩu"
+              required
+              autocomplete="new-password"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPasswordConfirm"
+              >Xác nhận mật khẩu:</label
+            >
+            <input
+              type="password"
+              id="regPasswordConfirm"
+              class="form-input"
+              placeholder="Nhập lại mật khẩu"
+              required
+              autocomplete="new-password"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            id="btnSubmitRegister"
+          >
+            <span>✨ Tạo tài khoản sinh viên</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL SO SÁNH GIẢI THUẬT (BENCHMARK) -->
+    <div class="modal-overlay" id="benchmarkModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>
+            <span>⚡</span> So Sánh Hiệu Năng Giải Thuật Môn Học (DSA Benchmark)
+          </h3>
+          <button type="button" class="btn-close-modal" id="btnCloseBenchmark">
+            &times;
+          </button>
+        </div>
+
+        <p
+          style="
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+          "
+        >
+          Đối chiếu lý thuyết & thực nghiệm giữa 3 thuật toán nền tảng của môn
+          Cấu trúc Dữ liệu & Giải thuật:
+          <strong>Dijkstra</strong> (Đường ngắn nhất với Min-Heap),
+          <strong>Bellman-Ford</strong> (Đường ngắn nhất / Chu trình âm), và
+          <strong>Prim</strong> (Cây khung nhỏ nhất MST):
+        </p>
+
+        <div
+          style="
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+          "
+        >
+          <label style="font-size: 0.82rem; font-weight: 600"
+            >Cặp điểm kiểm thử:</label
+          >
+          <select
+            id="benchStart"
+            class="form-select"
+            style="width: auto; padding: 4px 8px"
+          >
+            <option value="G">Cổng số 451</option>
+            <option value="C2">Nhà C2</option>
+            <option value="CT">Căn tin sinh viên</option>
+          </select>
+          <span>&rarr;</span>
+          <select
+            id="benchEnd"
+            class="form-select"
+            style="width: auto; padding: 4px 8px"
+          >
+            <option value="E3" selected>Nhà E3</option>
+            <option value="E6_W">Nhà E6</option>
+            <option value="D0">Nhà E9</option>
+            <option value="E8">Nhà E8</option>
+            <option value="C2">Nhà C2</option>
+            <option value="DN">Giảng đường Đa Năng</option>
+          </select>
+          <button
+            type="button"
+            id="btnRunBenchmark"
+            class="btn btn-primary"
+            style="padding: 6px 14px; font-size: 0.82rem"
+          >
+            Chạy Benchmark
+          </button>
+        </div>
+
+        <div
+          id="benchmarkLoading"
+          style="
+            display: none;
+            padding: 15px;
+            text-align: center;
+            color: var(--accent-gold);
+          "
+        >
+          ⏳ Đang tính toán và đo đạc vi giây...
+        </div>
+
+        <table class="benchmark-table" id="benchmarkTable">
+          <thead>
+            <tr>
+              <th>Thuật toán & Phân loại</th>
+              <th>Thời gian (&mu;s)</th>
+              <th>Độ phức tạp</th>
+              <th>Đỉnh duyệt / Xét</th>
+              <th>Kết quả tính toán</th>
+            </tr>
+          </thead>
+          <tbody id="benchmarkBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+
+        <div class="benchmark-insight" id="benchmarkInsight">
+          <!-- Insight text inserted dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/graphEngine.js"></script>
+    <script src="js/canvasMap.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# Compiled binaries
+*.exe
+*.out
+*.app
+*.o
+*.obj
+
+# Build directories
+build/
+bin/
+
+# IDE & OS
+.vscode/ipch/
+.vs/
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
