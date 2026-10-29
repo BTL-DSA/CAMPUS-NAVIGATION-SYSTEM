@@ -15,14 +15,14 @@ const NODE_COORDINATES = {
 
     // Trục ngang sau lưng C2 & Cụm C (Y = 840), Trục trước C2 & C1 (Y = 745)
     'J':    { x: 430, y: 840, name: 'Ngã tư dưới CV Thành công' },
-    'K':    { x: 580, y: 840, name: 'Nhà C2 (Sảnh sau)', isBuilding: true },
-    'C2':   { x: 615, y: 745, name: 'Nhà C2', isBuilding: true },
+    'K':    { x: 635, y: 840, name: 'Nhà C2 (Sảnh sau)', isBuilding: true },
+    'C2':   { x: 635, y: 745, name: 'Nhà C2', isBuilding: true },
     'C1_J': { x: 780, y: 840, name: 'Sảnh Tây Nhà C1' },
     'C1_Front': { x: 780, y: 840, name: 'Nhà C1 (Sảnh Tây)', isBuilding: true },
     'C1':   { x: 890, y: 780, name: 'Nhà C1', isBuilding: true },
     'C1_East': { x: 890, y: 780, name: 'Nhà C1 (Phía Đông)' },
     'V1':   { x: 430, y: 745, name: 'Đường nội bộ V1' },
-    'C2_Front': { x: 615, y: 745, name: 'Nhà C2 (Sảnh trước)', isBuilding: true },
+    'C2_Front': { x: 635, y: 745, name: 'Nhà C2 (Sảnh trước)', isBuilding: true },
     'V5':   { x: 665, y: 745, name: 'Ngã ba tim đường V5' },
     'V3':   { x: 780, y: 745, name: 'Đường nội bộ V3' },
     'V4':   { x: 920, y: 745, name: 'Ngã ba trước Nhà C3' },
@@ -43,6 +43,7 @@ const NODE_COORDINATES = {
     'P*':  { x: 1040, y: 560, name: 'Nhà để xe', isBuilding: true },
     'PZ':  { x: 1040, y: 560, name: 'Nhà để xe', isBuilding: true },
     'P_North': { x: 1040, y: 440, name: 'Lối Bắc Nhà để xe' },
+    'P_Road':  { x: 1040, y: 342, name: 'Ngã ba đường sau Nhà để xe' },
     'E8B': { x: 1225, y: 590, name: 'Nhà E8B', isBuilding: true },
 
     // Trục ngang Đường Sáng Tạo - thẳng tắp Y = 492
@@ -52,17 +53,20 @@ const NODE_COORDINATES = {
     'E7':  { x: 440, y: 315, name: 'Nhà E7', isBuilding: true },
 
     // Trục dọc Đường Ánh Đạo - thẳng đứng X = 575
+    'A_North': { x: 575, y: 175, name: 'Đường Ánh Đạo (Bắc)' },
     'A2':  { x: 575, y: 315, name: 'Đường Ánh Đạo A2' },
     'E1':  { x: 630, y: 315, name: 'Nhà E1', isBuilding: true },
     'A1':  { x: 575, y: 110, name: 'Đường Ánh Đạo A1' },
-    'E6_W':{ x: 640, y: 85,  name: 'Nhà E6', isBuilding: true },
+    'E6':  { x: 755, y: 85,  name: 'Nhà E6', isBuilding: true },
+    'E6_W':{ x: 755, y: 85,  name: 'Nhà E6', isBuilding: true },
 
     // Trục ngang Công viên Nghĩa Tình Y = 110 & Lối lên sảnh E10, Trục ngang mới Y = 85
     'XE':  { x: 410, y: 110, name: 'Đường dọc Công viên' },
-    'N1':  { x: 440, y: 160, name: 'Ngã ba N1' },
+    'N1':  { x: 440, y: 165, name: 'Ngã ba N1' },
     'E10': { x: 410, y: 85,  name: 'Nhà E10', isBuilding: true },
     'A0':  { x: 575, y: 85,  name: 'Ngã tư Ánh Đạo A0' },
     'Z6':  { x: 705, y: 85,  name: 'Hành lang Z6' },
+    'E9':  { x: 920, y: 85,  name: 'Nhà E9', isBuilding: true },
 
     // Trục hành lang nội bộ Nhà E1 (X = 630)
     'E1_North': { x: 630, y: 190, name: 'Hành lang E1 (Bắc)' },
@@ -73,8 +77,8 @@ const NODE_COORDINATES = {
     'Z3':  { x: 705, y: 440, name: 'Hành lang Z3' },
     'E3w': { x: 740, y: 440, name: 'Nhà E3 (Tây)', isBuilding: true },
     'E3':  { x: 740, y: 440, name: 'Nhà E3', isBuilding: true },
-    'Z4':  { x: 705, y: 342, name: 'Hành lang Z4' },
-    'E4w': { x: 740, y: 342, name: 'Nhà E4 (Tây)', isBuilding: true },
+    'Z4':  { x: 705, y: 315, name: 'Hành lang Z4' },
+    'E4w': { x: 740, y: 315, name: 'Nhà E4 (Tây)', isBuilding: true },
     'E4':  { x: 740, y: 315, name: 'Nhà E4', isBuilding: true },
     'Z5':  { x: 705, y: 190, name: 'Hành lang Z5' },
     'E5w': { x: 740, y: 190, name: 'Nhà E5 (Tây)', isBuilding: true },
@@ -86,7 +90,7 @@ const NODE_COORDINATES = {
     'D2':  { x: 920, y: 315, name: 'Nhà E4 (Đông)', isBuilding: true },
     'X1':  { x: 920, y: 342, name: 'Ngã ba X1' },
     'D1':  { x: 920, y: 190, name: 'Nhà E5 (Đông)', isBuilding: true },
-    'D0':  { x: 920, y: 85,  name: 'Nhà E9', isBuilding: true },
+    'D0':  { x: 920, y: 85,  name: 'Ngã ba Đường Hạnh Hợp' },
     'E8':  { x: 1130, y: 342, name: 'Nhà E8', isBuilding: true }
 };
 
@@ -479,8 +483,8 @@ class CanvasMap {
                 const candidate2 = { x: p1.x, y: p2.y };
                 const p3 = rawPts[i + 2];
 
-                const MAIN_X = [200, 405, 410, 430, 540, 575, 580, 615, 630, 665, 715, 780, 820, 920, 940, 1225];
-                const MAIN_Y = [70, 110, 160, 315, 342, 492, 560, 570, 600, 630, 710, 745, 840];
+                const MAIN_X = [200, 405, 410, 430, 540, 575, 580, 615, 630, 665, 705, 715, 755, 780, 820, 920, 940, 1040, 1060, 1225];
+                const MAIN_Y = [55, 70, 85, 110, 160, 315, 342, 440, 492, 560, 570, 600, 630, 710, 745, 840];
 
                 const p1_is_main_x = MAIN_X.includes(p1.x);
                 const p2_is_main_x = MAIN_X.includes(p2.x);

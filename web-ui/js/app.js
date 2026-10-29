@@ -21,10 +21,10 @@ const MAIN_DESTINATIONS = [
     { id: 'E3',   name: 'Nhà E3',              group: 'Khu E' },
     { id: 'E4',   name: 'Nhà E4',              group: 'Khu E' },
     { id: 'E5',   name: 'Nhà E5',              group: 'Khu E' },
-    { id: 'E6_W', name: 'Nhà E6',              group: 'Khu E' },
+    { id: 'E6',   name: 'Nhà E6',              group: 'Khu E' },
     { id: 'E7',   name: 'Nhà E7',              group: 'Khu E' },
     { id: 'E8',   name: 'Nhà E8',              group: 'Khu E' },
-    { id: 'D0',   name: 'Nhà E9',              group: 'Khu E' },
+    { id: 'E9',   name: 'Nhà E9',              group: 'Khu E' },
     { id: 'E10',  name: 'Nhà E10',             group: 'Khu E' },
     { id: 'G',    name: 'Cổng số 451',         group: 'Cổng & Tiện ích' },
     { id: 'CT',   name: 'Căn tin sinh viên',   group: 'Cổng & Tiện ích' },
@@ -72,18 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const scheduleAlertStatus = document.getElementById('scheduleAlertStatus');
     const scheduleAlertMessage = document.getElementById('scheduleAlertMessage');
 
-    // Benchmark elements
-    const btnOpenBenchmark   = document.getElementById('btnOpenBenchmark');
-    const benchmarkModal     = document.getElementById('benchmarkModal');
-    const btnCloseBenchmark  = document.getElementById('btnCloseBenchmark');
-    const benchStart         = document.getElementById('benchStart');
-    const benchEnd           = document.getElementById('benchEnd');
-    const btnRunBenchmark    = document.getElementById('btnRunBenchmark');
-    const benchmarkBody      = document.getElementById('benchmarkBody');
-    const benchmarkInsight   = document.getElementById('benchmarkInsight');
-    const benchmarkLoading   = document.getElementById('benchmarkLoading');
-    const benchmarkTable     = document.getElementById('benchmarkTable');
-
     // Auth & User Profile elements
     const userProfileBadge   = document.getElementById('userProfileBadge');
     const headerUserName     = document.getElementById('headerUserName');
@@ -117,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initTabs();
     initDropdowns();
     initMultiStopChips();
-    initBenchmarkModal();
 
     // 4. Hiển thị trạng thái "Online" ngay lập tức (engine tích hợp sẵn)
     setEngineOnline();
@@ -199,10 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
             { v: 'E3',   t: 'Nhà E3' },
             { v: 'E4',   t: 'Nhà E4' },
             { v: 'E5',   t: 'Nhà E5' },
-            { v: 'E6_W', t: 'Nhà E6' },
+            { v: 'E6',   t: 'Nhà E6' },
             { v: 'E7',   t: 'Nhà E7' },
             { v: 'E8',   t: 'Nhà E8' },
-            { v: 'D0',   t: 'Nhà E9' },
+            { v: 'E9',   t: 'Nhà E9' },
             { v: 'E10',  t: 'Nhà E10' },
             { v: 'CT',   t: 'Căn tin sinh viên' },
             { v: 'PZ',   t: 'Nhà để xe' },
@@ -486,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const legHeader = document.createElement('div');
                 legHeader.style.cssText = 'margin-top:12px;margin-bottom:6px;padding:7px 10px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;font-weight:700;color:var(--text-primary);display:flex;justify-content:space-between;align-items:center;border-left:3px solid #3b82f6;';
                 legHeader.innerHTML = `
-                    <span>Chặng ${leg.legIndex}: <strong>${leg.from}</strong> (${leg.fromName}) &rarr; <strong>${leg.to}</strong> (${leg.toName})</span>
+                    <span>Chặng ${leg.legIndex}: <strong>${leg.fromName || leg.from}</strong> &rarr; <strong>${leg.toName || leg.to}</strong></span>
                     <span style="color:#2563eb;font-weight:700">${Math.round(leg.distance * 10) / 10} m</span>
                 `;
                 directionsList.appendChild(legHeader);
@@ -541,11 +528,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let badgeHtml = '';
         if (data.start_node && data.start_node !== data.start) {
             const sName = UTC2_NODES[data.start_node]?.name || data.start_node;
-            badgeHtml += `🚩 Xuất phát tối ưu: <strong>${data.start_node}</strong> (${sName})`;
+            badgeHtml += `🚩 Xuất phát tối ưu: <strong>${sName}</strong>`;
         }
         if (data.entry_node && data.entry_node !== data.end) {
             if (badgeHtml) badgeHtml += ' &nbsp;|&nbsp; ';
-            badgeHtml += `🚪 Cửa vào tối ưu: <strong>${data.entry_node}</strong> (${UTC2_NODES[data.entry_node]?.name || ''})`;
+            const eName = UTC2_NODES[data.entry_node]?.name || data.entry_node;
+            badgeHtml += `🚪 Cửa vào tối ưu: <strong>${eName}</strong>`;
         }
         if (badgeHtml) {
             doorBadge.style.display = 'flex';
@@ -782,63 +770,5 @@ document.addEventListener('DOMContentLoaded', () => {
         function hideAuthAlert() {
             authAlert.style.display = 'none';
         }
-    }
-
-    // =========================================================================
-    // Modal So sánh giải thuật (Benchmark — 3 giải thuật cốt lõi DSA)
-    // =========================================================================
-    function initBenchmarkModal() {
-        btnOpenBenchmark.addEventListener('click', () => {
-            benchmarkModal.classList.add('active');
-            runBenchmarkUI();
-        });
-        btnCloseBenchmark.addEventListener('click', () => benchmarkModal.classList.remove('active'));
-        benchmarkModal.addEventListener('click', e => {
-            if (e.target === benchmarkModal) benchmarkModal.classList.remove('active');
-        });
-        btnRunBenchmark.addEventListener('click', runBenchmarkUI);
-    }
-
-    function runBenchmarkUI() {
-        const start = benchStart.value;
-        const end   = benchEnd.value;
-
-        benchmarkLoading.style.display = 'block';
-        benchmarkTable.style.opacity   = '0.4';
-
-        // Dùng setTimeout để trình duyệt kịp render trạng thái loading
-        setTimeout(() => {
-            try {
-                const data = GraphEngine.benchmark(start, end, '');
-                benchmarkBody.innerHTML = '';
-
-                data.metrics.forEach(m => {
-                    const tr = document.createElement('tr');
-                    let tagClass = 'dijkstra';
-                    if (m.name.includes('Bellman')) tagClass = 'bellman';
-                    if (m.name.includes('Prim'))    tagClass = 'prim';
-
-                    tr.innerHTML = `
-                        <td>
-                            <span class="algo-tag ${tagClass}">${m.name}</span>
-                            <div style="font-size:0.75rem;font-weight:600;color:#e2e8f0;margin-top:2px">${m.category}</div>
-                            <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:1px">${m.description}</div>
-                        </td>
-                        <td><strong style="color:var(--accent-gold);">${m.time_us} &mu;s</strong></td>
-                        <td><code style="font-size:0.75rem;padding:2px 4px;background:rgba(15,23,42,0.8);border-radius:4px;color:#38bdf8;">${m.complexity}</code></td>
-                        <td>${m.visited_nodes} lượt xét</td>
-                        <td><strong style="color:#f8fafc;">${m.result_label}</strong></td>
-                    `;
-                    benchmarkBody.appendChild(tr);
-                });
-
-                benchmarkInsight.innerHTML = `💡 <strong>Đối chiếu học thuật DSA:</strong> ${data.conclusion}`;
-            } catch (err) {
-                benchmarkInsight.textContent = 'Lỗi khi chạy Benchmark: ' + err.message;
-            } finally {
-                benchmarkLoading.style.display = 'none';
-                benchmarkTable.style.opacity   = '1';
-            }
-        }, 50);
     }
 });

@@ -26,15 +26,6 @@
         </div>
       </div>
       <div class="header-actions">
-        <!-- Nút So sánh giải thuật -->
-        <button
-          type="button"
-          id="btnOpenBenchmark"
-          class="btn-benchmark-toggle"
-          title="So sánh hiệu năng Dijkstra vs Bellman-Ford vs Prim"
-        >
-          <span>⚡ So sánh giải thuật</span>
-        </button>
         <div class="server-status">
           <div class="status-dot" id="statusDot"></div>
           <span id="statusText">Standalone</span>
@@ -229,8 +220,8 @@
                   <span class="stop-chip" data-id="E3">🎓 Nhà E3</span>
                   <span class="stop-chip" data-id="E4">🎓 Nhà E4</span>
                   <span class="stop-chip" data-id="E5">🎓 Nhà E5</span>
-                  <span class="stop-chip" data-id="E6_W">🏢 Nhà E6</span>
-                  <span class="stop-chip" data-id="D0">🏢 Nhà E9</span>
+                  <span class="stop-chip" data-id="E6">🏢 Nhà E6</span>
+                  <span class="stop-chip" data-id="E9">🏢 Nhà E9</span>
                   <span class="stop-chip" data-id="E8">⚙️ Nhà E8</span>
                   <span class="stop-chip" data-id="PZ">🏍️ Nhà để xe</span>
                   <span class="stop-chip" data-id="V4_S">📚 Nhà C3</span>
@@ -344,8 +335,8 @@
                   <option value="E3">Nhà E3</option>
                   <option value="E4">Nhà E4</option>
                   <option value="E5">Nhà E5</option>
-                  <option value="E6_W">Nhà E6</option>
-                  <option value="D0">Nhà E9</option>
+                  <option value="E6">Nhà E6</option>
+                  <option value="E9">Nhà E9</option>
                   <option value="E8">Nhà E8</option>
                   <option value="E10">Nhà E10</option>
                   <option value="CT">Căn tin sinh viên</option>
@@ -369,8 +360,8 @@
                   <option value="E3">Nhà E3</option>
                   <option value="E4">Nhà E4</option>
                   <option value="E5">Nhà E5</option>
-                  <option value="E6_W">Nhà E6</option>
-                  <option value="D0">Nhà E9</option>
+                  <option value="E6">Nhà E6</option>
+                  <option value="E9">Nhà E9</option>
                   <option value="E8">Nhà E8</option>
                   <option value="E10">Nhà E10</option>
                   <option value="CT">Căn tin sinh viên</option>
@@ -699,109 +690,6 @@
             <span>✨ Tạo tài khoản sinh viên</span>
           </button>
         </form>
-      </div>
-    </div>
-
-    <!-- MODAL SO SÁNH GIẢI THUẬT (BENCHMARK) -->
-    <div class="modal-overlay" id="benchmarkModal">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3>
-            <span>⚡</span> So Sánh Hiệu Năng Giải Thuật Môn Học (DSA Benchmark)
-          </h3>
-          <button type="button" class="btn-close-modal" id="btnCloseBenchmark">
-            &times;
-          </button>
-        </div>
-
-        <p
-          style="
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-          "
-        >
-          Đối chiếu lý thuyết & thực nghiệm giữa 3 thuật toán nền tảng của môn
-          Cấu trúc Dữ liệu & Giải thuật:
-          <strong>Dijkstra</strong> (Đường ngắn nhất với Min-Heap),
-          <strong>Bellman-Ford</strong> (Đường ngắn nhất / Chu trình âm), và
-          <strong>Prim</strong> (Cây khung nhỏ nhất MST):
-        </p>
-
-        <div
-          style="
-            display: flex;
-            gap: 10px;
-            margin-bottom: 14px;
-            align-items: center;
-            flex-wrap: wrap;
-          "
-        >
-          <label style="font-size: 0.82rem; font-weight: 600"
-            >Cặp điểm kiểm thử:</label
-          >
-          <select
-            id="benchStart"
-            class="form-select"
-            style="width: auto; padding: 4px 8px"
-          >
-            <option value="G">Cổng số 451</option>
-            <option value="C2">Nhà C2</option>
-            <option value="CT">Căn tin sinh viên</option>
-          </select>
-          <span>&rarr;</span>
-          <select
-            id="benchEnd"
-            class="form-select"
-            style="width: auto; padding: 4px 8px"
-          >
-            <option value="E3" selected>Nhà E3</option>
-            <option value="E6_W">Nhà E6</option>
-            <option value="D0">Nhà E9</option>
-            <option value="E8">Nhà E8</option>
-            <option value="C2">Nhà C2</option>
-            <option value="DN">Giảng đường Đa Năng</option>
-          </select>
-          <button
-            type="button"
-            id="btnRunBenchmark"
-            class="btn btn-primary"
-            style="padding: 6px 14px; font-size: 0.82rem"
-          >
-            Chạy Benchmark
-          </button>
-        </div>
-
-        <div
-          id="benchmarkLoading"
-          style="
-            display: none;
-            padding: 15px;
-            text-align: center;
-            color: var(--accent-gold);
-          "
-        >
-          ⏳ Đang tính toán và đo đạc vi giây...
-        </div>
-
-        <table class="benchmark-table" id="benchmarkTable">
-          <thead>
-            <tr>
-              <th>Thuật toán & Phân loại</th>
-              <th>Thời gian (&mu;s)</th>
-              <th>Độ phức tạp</th>
-              <th>Đỉnh duyệt / Xét</th>
-              <th>Kết quả tính toán</th>
-            </tr>
-          </thead>
-          <tbody id="benchmarkBody">
-            <!-- Populated by JS -->
-          </tbody>
-        </table>
-
-        <div class="benchmark-insight" id="benchmarkInsight">
-          <!-- Insight text inserted dynamically -->
-        </div>
       </div>
     </div>
 

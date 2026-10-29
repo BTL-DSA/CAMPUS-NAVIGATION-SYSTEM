@@ -24,14 +24,14 @@
     "id": "K",
     "name": "Nhà C2 (Sảnh sau)",
     "description": "Phòng học C2 (Cửa Nam)",
-    "x": 580,
+    "x": 635,
     "y": 840
   },
   {
     "id": "C2",
     "name": "Nhà C2",
     "description": "Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K)",
-    "x": 615,
+    "x": 635,
     "y": 745
   },
   {
@@ -73,7 +73,7 @@
     "id": "C2_Front",
     "name": "Nhà C2 (Sảnh trước)",
     "description": "Cửa Bắc Nhà C2 nối đường nội bộ",
-    "x": 615,
+    "x": 635,
     "y": 745
   },
   {
@@ -268,9 +268,9 @@
   {
     "id": "N1",
     "name": "Ngã ba N1",
-    "description": "Lối rẽ từ sảnh Tây E7 lên Công viên Nghĩa tình",
+    "description": "Lối rẽ từ sảnh Tây E7 sang Đường Ánh Đạo",
     "x": 440,
-    "y": 160
+    "y": 165
   },
   {
     "id": "E10",
@@ -297,7 +297,7 @@
     "id": "E6_W",
     "name": "Nhà E6",
     "description": "Phòng học E6 (Lối Tây)",
-    "x": 640,
+    "x": 755,
     "y": 85
   },
   {
@@ -319,14 +319,14 @@
     "name": "Hành lang Z4",
     "description": "Lối vào cửa Tây Nhà E4",
     "x": 705,
-    "y": 342
+    "y": 315
   },
   {
     "id": "E4w",
     "name": "Nhà E4 (Tây)",
     "description": "Phòng học E4 (Lối Tây)",
     "x": 740,
-    "y": 342
+    "y": 315
   },
   {
     "id": "Z5",
@@ -460,5 +460,47 @@
     "description": "Góc Đông-Bắc Giảng đường Đa năng nối Đường Sáng tạo",
     "x": 820,
     "y": 492
+  },
+  {
+    "id": "E6",
+    "name": "Nhà E6",
+    "description": "Phòng học E6 (Giữa tòa nhà)",
+    "x": 755,
+    "y": 85
+  },
+  {
+    "id": "E9",
+    "name": "Nhà E9",
+    "description": "Phòng học E9 (Giữa tòa nhà)",
+    "x": 920,
+    "y": 85
+  },
+  {
+    "id": "E6_Front",
+    "name": "Lối vào Nhà E6",
+    "description": "Lối vào sảnh Nhà E6",
+    "x": 755,
+    "y": 85
+  },
+  {
+    "id": "E9_Front",
+    "name": "Lối vào Nhà E9",
+    "description": "Lối vào sảnh Nhà E9",
+    "x": 1060,
+    "y": 85
+  },
+  {
+    "id": "P_Road",
+    "name": "Ngã ba đường sau Nhà để xe",
+    "description": "Giao lộ đường sau Nhà xe và đường sang E8",
+    "x": 1040,
+    "y": 342
+  },
+  {
+    "id": "A_North",
+    "name": "Đường Ánh Đạo (Bắc)",
+    "description": "Giao lộ Ánh Đạo ngang phía Bắc Nhà E7",
+    "x": 575,
+    "y": 175
   }
 ]

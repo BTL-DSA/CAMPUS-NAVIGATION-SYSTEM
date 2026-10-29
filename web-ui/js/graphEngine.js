@@ -31,14 +31,14 @@ const UTC2_NODES = {
 
     // Trục ngang sau lưng C2 & Cụm C (Y = 840), Trục trước C2 & C1 (Y = 745)
     'J':    { id:'J',   name:'Ngã tư dưới CV Thành công',  description:'Giao lối lên V1 và sang cụm C',           x:430,  y:840 },
-    'K':    { id:'K',   name:'Nhà C2 (Sảnh sau)',          description:'Phòng học C2 (Cửa Nam)',                  x:580,  y:840 },
-    'C2':   { id:'C2',  name:'Nhà C2',                     description:'Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K)', x:580,  y:745 },
+    'K':    { id:'K',   name:'Nhà C2 (Sảnh sau)',          description:'Phòng học C2 (Cửa Nam)',                  x:635,  y:840 },
+    'C2':   { id:'C2',  name:'Nhà C2',                     description:'Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K)', x:635,  y:745 },
     'C1_J': { id:'C1_J',name:'Sảnh Tây Nhà C1',         description:'Khoảng sân giữa Nhà C2 và Nhà C1',       x:780,  y:840 },
     'C1_Front': { id:'C1_Front', name:'Nhà C1 (Sảnh Tây)', description:'Sảnh đón phía Tây Nhà C1 nối ngã ba V3', x:780, y:840 },
     'C1':   { id:'C1',  name:'Nhà C1',                   description:'Điểm đón phía Đông Nhà C1 (Đường Hội Hộp)', x:890,  y:780 },
     'C1_East': { id:'C1_East', name:'Nhà C1 (Phía Đông)', description:'Điểm đón phía Đông Nhà C1',             x:890,  y:780 },
     'V1':   { id:'V1',  name:'Đường nội bộ V1',            description:'Góc Tây-Bắc Nhà C2',                     x:430,  y:745 },
-    'C2_Front': { id:'C2_Front', name:'Nhà C2 (Sảnh trước)', description:'Cửa Bắc Nhà C2 đường nội bộ',       x:615,  y:745 },
+    'C2_Front': { id:'C2_Front', name:'Nhà C2 (Sảnh trước)', description:'Cửa Bắc Nhà C2 đường nội bộ',       x:635,  y:745 },
     'V5':   { id:'V5',  name:'Ngã ba tim đường V5',        description:'Ngã ba đường nội bộ trước C2 nối lên Đa năng', x:665, y:745 },
     'V3':   { id:'V3',  name:'Đường nội bộ V3',            description:'Đường nội bộ trước C1 và C2',             x:780,  y:745 },
     'V4':   { id:'V4',  name:'Ngã ba trước Nhà C3',        description:'Ngã ba Đường Hội Hộp và đường trước C2',  x:920,  y:745 },
@@ -59,6 +59,7 @@ const UTC2_NODES = {
     'P*':  { id:'P*',  name:'Nhà để xe',                  description:'Khu để xe máy / ô tô',                   x:1040, y:560 },
     'PZ':  { id:'PZ',  name:'Nhà để xe',                  description:'Khu để xe máy / ô tô',                   x:1040, y:560 },
     'P_North': { id:'P_North', name:'Lối Bắc Nhà để xe', description:'Lối thông sau Nhà để xe sang Nhà E3', x:1040, y:440 },
+    'P_Road':  { id:'P_Road',  name:'Ngã ba đường sau Nhà để xe', description:'Giao lộ đường sau Nhà xe và đường sang E8', x:1040, y:342 },
     'E8B': { id:'E8B', name:'Nhà E8B',                    description:'Phòng thí nghiệm PTC-UTC2',               x:1225, y:590 },
 
     // Trục ngang Đường Sáng Tạo - thẳng tắp Y = 492
@@ -68,17 +69,22 @@ const UTC2_NODES = {
     'E7':  { id:'E7',  name:'Nhà E7',                     description:'Sảnh hành lang phía Tây Nhà E7 (cạnh Quảng trường 27/4)', x:440,  y:315 },
 
     // Trục dọc Đường Ánh Đạo - thẳng đứng X = 575
+    'A_North': { id:'A_North', name:'Đường Ánh Đạo (Bắc)', description:'Giao lộ Ánh Đạo ngang phía Bắc Nhà E7', x:575, y:175 },
     'A2':  { id:'A2',  name:'Đường Ánh Đạo A2',           description:'Ngã ba tim đường Ánh Đạo đối diện E1',   x:575,  y:315 },
     'E1':  { id:'E1',  name:'Nhà E1',                     description:'Văn phòng Bộ môn',                       x:630,  y:315 },
     'A1':  { id:'A1',  name:'Đường Ánh Đạo A1',           description:'Bùng binh phía Bắc đường Ánh Đạo',       x:575,  y:110 },
-    'E6_W':{ id:'E6_W',name:'Nhà E6',                     description:'Phòng học E6 (Lối Tây)',                 x:640,  y:85  },
+    'E6':  { id:'E6',  name:'Nhà E6',                     description:'Phòng học E6 (Giữa tòa nhà)',             x:755,  y:85  },
+    'E6_W':{ id:'E6_W',name:'Nhà E6',                     description:'Phòng học E6 (Giữa tòa nhà)',             x:755,  y:85  },
+    'E6_Front':{ id:'E6_Front', name:'Lối vào Nhà E6',    description:'Lối vào sảnh Nhà E6',                    x:755,  y:85  },
 
     // Trục ngang Công viên Nghĩa Tình Y = 110 & Lối lên sảnh E10
     'XE':  { id:'XE',  name:'Đường dọc Công viên',         description:'Lối qua Công viên Nghĩa tình sang E10',  x:410,  y:110 },
-    'N1':  { id:'N1',  name:'Ngã ba N1',                  description:'Lối rẽ từ sảnh Tây E7 lên Công viên Nghĩa tình', x:440, y:160 },
+    'N1':  { id:'N1',  name:'Ngã ba N1',                  description:'Lối rẽ từ sảnh Tây E7 sang Đường Ánh Đạo', x:440, y:165 },
     'E10': { id:'E10', name:'Nhà E10',                    description:'Phòng học E10 (Cầu lát đá trước sảnh)', x:410,  y:85  },
     'A0':  { id:'A0',  name:'Ngã tư Ánh Đạo A0',          description:'Ngã tư đường Ánh Đạo và đường ngang mới E10-D0', x:575, y:85 },
     'Z6':  { id:'Z6',  name:'Hành lang Z6',               description:'Cửa đón đầu phía Bắc Nhà E1',            x:705,  y:85  },
+    'E9_Front':{ id:'E9_Front', name:'Lối vào Nhà E9',    description:'Lối vào sảnh Nhà E9',                    x:920,  y:85  },
+    'E9':  { id:'E9',  name:'Nhà E9',                     description:'Phòng học E9 (Giữa tòa nhà)',             x:920,  y:85  },
 
     // Trục hành lang nội bộ Nhà E1 (X = 630)
     'E1_North': { id:'E1_North', name:'Hành lang E1 (Bắc)', description:'Hành lang trong lòng Nhà E1 ngang Nhà E5', x:630, y:190 },
@@ -89,8 +95,8 @@ const UTC2_NODES = {
     'Z3':  { id:'Z3',  name:'Hành lang Z3',               description:'Lối vào cửa Tây Nhà E3',                 x:705,  y:440 },
     'E3w': { id:'E3w', name:'Nhà E3 (Tây)',               description:'Phòng học E3 (Lối Tây)',                 x:740,  y:440 },
     'E3':  { id:'E3',  name:'Nhà E3',                     description:'Phòng học E3',                           x:740,  y:440 },
-    'Z4':  { id:'Z4',  name:'Hành lang Z4',               description:'Lối vào cửa Tây Nhà E4',                 x:705,  y:342 },
-    'E4w': { id:'E4w', name:'Nhà E4 (Tây)',               description:'Phòng học E4 (Lối Tây)',                 x:740,  y:342 },
+    'Z4':  { id:'Z4',  name:'Hành lang Z4',               description:'Lối vào cửa Tây Nhà E4',                 x:705,  y:315 },
+    'E4w': { id:'E4w', name:'Nhà E4 (Tây)',               description:'Phòng học E4 (Lối Tây)',                 x:740,  y:315 },
     'E4':  { id:'E4',  name:'Nhà E4',                     description:'Phòng học E4',                           x:740,  y:315 },
     'Z5':  { id:'Z5',  name:'Hành lang Z5',               description:'Lối vào cửa Tây Nhà E5',                 x:705,  y:190 },
     'E5w': { id:'E5w', name:'Nhà E5 (Tây)',               description:'Phòng học E5 (Lối Tây)',                 x:740,  y:190 },
@@ -102,7 +108,7 @@ const UTC2_NODES = {
     'D2':  { id:'D2',  name:'Nhà E4 (Đông)',              description:'Phòng học E4 (Lối Đông)',                x:920,  y:315 },
     'X1':  { id:'X1',  name:'Ngã ba X1',                  description:'Lối rẽ sang Nhà E8',                    x:920,  y:342 },
     'D1':  { id:'D1',  name:'Nhà E5 (Đông)',              description:'Phòng học E5 (Lối Đông)',                x:920,  y:190 },
-    'D0':  { id:'D0',  name:'Nhà E9',                     description:'Phòng học E9',                           x:920,  y:85  },
+    'D0':  { id:'D0',  name:'Ngã ba Đường Hạnh Hợp',      description:'Giao lộ phía Bắc Đường Hạnh Hợp',        x:920,  y:85  },
     'E8':  { id:'E8',  name:'Nhà E8',                     description:'Phòng thí nghiệm & Xưởng thực tập',      x:1130, y:342 },
 };
 
@@ -139,6 +145,7 @@ const UTC2_EDGES_RAW = [
     ['T','J',15,'internal'],
     ['J','K',25,'internal'],
     ['K','C1_Front',15,'internal'],
+    ['K','C2_Front',20,'internal'],
     ['C1_Front','V3',15,'internal'],
     ['C1','V4',12,'internal'],
     ['C1','V4_S',20,'internal'],
@@ -162,7 +169,7 @@ const UTC2_EDGES_RAW = [
     ['H3','HP',25,'main'],
     ['HP','PZ',9,'branch'],
     ['PZ','P_North',12,'branch'],
-    ['P_North','D3',15,'branch'],
+    ['P_North','P_Road',16,'branch'],
     ['HP','HE8B',38,'main'],
     ['HE8B','E8B',10,'branch'],
     ['H1','S1',25,'main'],
@@ -181,10 +188,13 @@ const UTC2_EDGES_RAW = [
     ['N1','XE',12,'internal'],
     ['W3','E7',28,'main'],
     ['S1','E7',30,'internal'],
-    ['E7','N1',32,'internal'],
+    ['E7','N1',25,'internal'],
+    ['N1','A_North',18,'main'],
     ['S2','A2',21,'main'],
     ['A2','E1',16,'internal'],
-    ['A2','A1',24,'main'],
+    ['A1','A_North',10,'main'],
+    ['A_North','A2',14,'main'],
+    ['A_North','E1_North',16,'internal'],
     ['A2','E1_Mid',16,'internal'],
     ['Z4','E4w',6,'branch'],
     ['Z4','Z3',25,'internal'],
@@ -193,13 +203,13 @@ const UTC2_EDGES_RAW = [
     ['Z4','Z5',29,'internal'],
     ['Z5','E5w',6,'branch'],
     ['R2','D3',8,'internal'],
-    ['D3','X1',10,'internal'],
-    ['X1','D2',6,'internal'],
-    ['D2','D1',16,'internal'],
-    ['D1','D0',16,'internal'],
-    ['X1','E8',39,'branch'],
+    ['D3','X1',10,'main'],
+    ['X1','D2',6,'main'],
+    ['D2','D1',16,'main'],
+    ['D1','D0',16,'main'],
+    ['X1','P_Road',18,'main'],
+    ['P_Road','E8',21,'branch'],
     ['E4w','X1',22,'branch'],
-    ['A1','E6_W',22,'branch'],
     ['E10','A0',40,'internal'],
     ['A0','D0',60,'internal'],
     ['A0','A1',18,'internal'],
@@ -207,8 +217,14 @@ const UTC2_EDGES_RAW = [
     ['E6_W','D0',50,'internal'],
     ['A0','Z6',20,'internal'],
     ['Z6','Z5',16,'internal'],
+    ['Z6','E6',8,'main'],
+    
+    ['E6','E6_W',0,'internal'],
+    ['E6','D0',28,'main'],
+    
+    
+    ['D0','E9',0,'branch'],
     ['V4','V4_S',18,'internal'],
-    ['E7','A2',45,'internal'],
     ['CT','V4',0,'internal'],
     ['E1_North','E1_Mid',22,'internal'],
     ['E1_Mid','E1_South',22,'internal'],
@@ -254,10 +270,11 @@ const NODE_ALIASES = {
     'E3':'E3', 'NHÀ E3':'E3', 'E3W':'E3w', 'E3_WEST':'E3w', 'E3_EAST':'D3', 'E3_East':'D3', 'E3_E':'D3',
     'E4':'E4', 'NHÀ E4':'E4', 'E4W':'E4w', 'E4_WEST':'E4w', 'E4_EAST':'D2', 'E4_East':'D2', 'E4_E':'D2',
     'E5':'E5', 'NHÀ E5':'E5', 'E5W':'E5w', 'E5_WEST':'E5w', 'E5_EAST':'D1', 'E5_East':'D1', 'E5_E':'D1',
-    'E6':'E6_W', 'NHÀ E6':'E6_W', 'E6_W':'E6_W',
+    'E6':'E6', 'NHÀ E6':'E6', 'E6_W':'E6', 'PHÒNG E6':'E6',
+    'A_NORTH':'A_North', 'A_North':'A_North',
     'A0':'A0', 'NGÃ TƯ A0':'A0',
     'Z6':'Z6', 'HÀNH LANG Z6':'Z6',
-    'E9':'D0', 'NHÀ E9':'D0', 'D0':'D0',
+    'E9':'E9', 'NHÀ E9':'E9', 'D0':'E9', 'PHÒNG E9':'E9',
     'E7':'E7', 'NHÀ E7':'E7', 'NHÀ E8':'E8', 'NHÀ E8B':'E8B', 'NHÀ E10':'E10',
 };
 
@@ -551,6 +568,12 @@ function isEdgeRestricted(u, v, startId, endId, blockedSet, isMultiStop = false)
 
     // 1. Kịch bản Cụm C (C1, C2, C3, CT...): Tuyến chuẩn qua trục nội bộ C (T -> J)
     if (destIsClusterC || srcIsClusterC) {
+        const isToC1 = (destResolved === 'C1' || endId === 'C1' || endId === 'NHÀ C1' || endId === 'HỘI TRƯỜNG C1' || endId === 'C1_SANH');
+        const isFromC1 = (srcResolved === 'C1' || startId === 'C1' || startId === 'NHÀ C1' || startId === 'HỘI TRƯỜNG C1' || startId === 'C1_SANH');
+        if (isToC1 || isFromC1) {
+            if ((u === 'J' && v === 'K') || (u === 'K' && v === 'J')) return true;
+            if ((u === 'C1_Front' && v === 'V3') || (u === 'V3' && v === 'C1_Front')) return true;
+        }
         if (isTW1) {
             const tjBlocked = blockedSet && (blockedSet.has('T-J') || blockedSet.has('J-T'));
             if (!tjBlocked) {
@@ -590,6 +613,25 @@ function isEdgeRestricted(u, v, startId, endId, blockedSet, isMultiStop = false)
         if (isS1E7) {
             return true; // Bắt buộc đi thẳng S1 -> S2
         }
+        if ((u === 'E4w' && v === 'E1_Mid') || (u === 'E1_Mid' && v === 'E4w')) {
+            return true; // Không đi xuyên qua hành lang Nhà E1
+        }
+    }
+    const startResolved_e6 = resolveAlias(startId);
+    if (startResolved_e6 === 'E6_W' || startId === 'E6' || startId === 'E6_W' || startId === 'NHÀ E6') {
+        if ((u === 'E4w' && v === 'E1_Mid') || (u === 'E1_Mid' && v === 'E4w')) {
+            return true;
+        }
+    }
+    if (endResolved === 'E9' || endId === 'E9' || endId === 'NHÀ E9') {
+        if ((u === 'E4w' && v === 'E1_Mid') || (u === 'E1_Mid' && v === 'E4w')) {
+            return true;
+        }
+    }
+    if (startResolved_e6 === 'E9' || startId === 'E9' || startId === 'NHÀ E9') {
+        if ((u === 'E4w' && v === 'E1_Mid') || (u === 'E1_Mid' && v === 'E4w')) {
+            return true;
+        }
     }
 
     // 5. Kịch bản các tòa nhà E Tây-Bắc khác (E7, E10):
@@ -597,6 +639,11 @@ function isEdgeRestricted(u, v, startId, endId, blockedSet, isMultiStop = false)
         if (isW3E7 || isE7A2 || isS1S2) {
             return true; // Cấm rẽ từ W3 vào E7, cấm từ E7 luồn qua cầu Ánh Đạo A2, và cấm đi lùi S1->S2 khi lên E10
         }
+    }
+    // Khi từ Nhà E7 sang Nhà E1: đi phía Nam hợp lý hơn (S1 -> S2 -> A2 -> E1)
+    if (startId === 'E7' && (endResolved === 'E1' || endId === 'E1' || endId === 'NHÀ E1' || endId === 'KHOA CNTT' || endId === 'E1_Mid' || endResolved === 'E1_Mid')) {
+        const isE7N1 = (u === 'E7' && v === 'N1') || (u === 'N1' && v === 'E7');
+        if (isE7N1) return true;
     }
     const isE1Related = (endResolved === 'E1' || endId === 'E1' || endId === 'NHÀ E1' || endId === 'KHOA CNTT' || endId === 'E1_Mid' || endResolved === 'E1_Mid');
     const startIsERelated = (startId === 'E3' || startId === 'E3w' || startId === 'E4' || startId === 'E4w' || startId === 'E5' || startId === 'E5w' || startId === 'E3_East' || startId === 'E4_East' || startId === 'E5_East' || startId === 'D3' || startId === 'D2' || startId === 'D1');
@@ -628,42 +675,80 @@ function isEdgeRestricted(u, v, startId, endId, blockedSet, isMultiStop = false)
     const destIsEEast = isEastAxis(endId);
     const isEBuilding = destIsEWest || destIsEEast || endId === 'E3' || endId === 'E4' || endId === 'E5';
     if (isEBuilding) {
-        if (startId === 'G' || startId === 'T' || startId === 'W1' || startId === 'H1') {
+        if (startId === 'G' || startId === 'T' || startId === 'W1') {
+            // Tuyến chuẩn từ Cổng tới Nhà E3, E4, E5 theo đúng sơ đồ màu đỏ:
+            // Đi dọc Đường 449 (W1 -> W2) rồi rẽ vào Đường Sáng Tạo (W2 -> S1 -> S2)
+            if (isW1H1) return true; // Cấm đi xuống Đường Hội Nhập H1 vòng qua Giảng đường Đa Năng
+            if (isW2W3) return true; // Cấm chạy vượt qua nút W2 lên phía Bắc W3
+            if (isS1E7) return true; // Cấm rẽ vào Nhà E7
+            if (isH3R2 || isQR2) return true; // Chặn đường vòng ra phía Đông hông nhà để xe
+            if (isZ6Z5) return true;
+
+            const isDestE4 = (endId === 'E4' || endId === 'E4w' || destResolved === 'E4w' || destResolved === 'E4');
+            const isDestE5 = (endId === 'E5' || endId === 'E5w' || destResolved === 'E5w' || destResolved === 'E5');
+            const isDestE3 = (endId === 'E3' || endId === 'E3w' || destResolved === 'E3w' || destResolved === 'E3');
+
+            if (isDestE4 || isDestE5) {
+                // Vào Nhà E1 qua sảnh Ánh Đạo A2 -> E1_Mid:
+                // Nhánh E4: E1_Mid -> E4w
+                // Nhánh E5: E1_Mid -> E1_North -> E5w
+                if (isS2Q) return true; // Đi vào trục Ánh Đạo A2 -> E1, không đi tiếp ra nút Q
+                if ((u === 'A2' && v === 'A_North') || (u === 'A_North' && v === 'A2')) return true; // Bắt buộc đi trong lòng E1
+                if ((u === 'Z4' && v === 'Z5') || (u === 'Z5' && v === 'Z4')) return true;
+            } else if (isDestE3) {
+                // Nhánh E3: Đi thẳng Đường Sáng Tạo S2 -> Q -> Z3 -> E3w
+                const isA2E1Mid = (u === 'A2' && (v === 'E1_Mid' || v === 'E1')) || (v === 'A2' && (u === 'E1_Mid' || u === 'E1'));
+                if (isA2E1Mid) return true;
+            }
+        } else if (startId === 'H1') {
             if (destIsEWest) {
-                // Điểm đến là LỐI TÂY (E3w, E4w, E5w):
-                // Tuyến chuẩn qua Đường Sáng Tạo: H1 -> S1 -> S2 -> Q -> Z3 -> Z4 -> Z5
                 if (isW2S1) return true;
                 if (isH2S2) return true;
                 const isA2E1Mid = (u === 'A2' && (v === 'E1_Mid' || v === 'E1')) || (v === 'A2' && (u === 'E1_Mid' || u === 'E1'));
                 if (isE1Z4 || isA2E1Mid) return true;
-                if (isH3R2 || isQR2) return true; // Chặn đường vòng ra phía Đông hông nhà để xe khi đi vào Lối Tây
+                if (isH3R2 || isQR2) return true;
                 if (isZ6Z5) return true;
             } else {
-                // Điểm đến là LỐI ĐÔNG (D3, D2, D1):
-                // Tuyến chuẩn đi thẳng Đường Hội Nhập H1 -> H2 -> H3 -> R2 -> D3 -> D2 -> D1
-                // TUYỆT ĐỐI KHÔNG CHẶN H3-R2 để không bị đi vòng dư thừa xuyên qua Nhà để xe!
-                if (isH1S1) return true; // Không rẽ vào Đường Sáng Tạo S1
-                if (isQR2) return true;  // Không luồn sau ngõ hẹp Q-R2
-                if (isZ6Z5) return true; // Không chạy vòng lên phía Bắc A0/Z6
+                if (isH1S1) return true;
+                if (isQR2) return true;
+                if (isZ6Z5) return true;
             }
         } else if (isClusterC(startId) || startId === 'H2' || startId === 'DN') {
             // Xuất phát từ Cụm C (C2, C1, V4...) hoặc Đa Năng đi E3/E4/E5:
             // Tuyến vòng ngoài phía Đông qua Nhà để xe: H2 -> H3 -> R2 -> D3...
             if (isQR2) return true;
             if (isZ6Z5) return true;
-        } else {
-            // Xuất phát từ phía Bắc (E10, A0, A1, A2...):
+        } else if (['E10', 'NHÀ E10', 'A0', 'NGÃ TƯ A0'].includes(startId) || ['E10', 'NHÀ E10', 'A0', 'NGÃ TƯ A0'].includes(srcResolved)) {
+            // Xuất phát từ phía Bắc (E10, A0...):
             if (isS2Q || isA2S2) return true;
             if (startId === 'E10' || startId === 'NHÀ E10') {
                 if (isXEE10 || isA0A1) return true;
+                if ((u === 'A0' && v === 'D0') || (u === 'D0' && v === 'A0') ||
+                    (u === 'E6_Front' && v === 'D0') || (u === 'D0' && v === 'E6_Front')) return true;
             }
         }
     }
 
     // 7. Kịch bản Nhà E8 / E8B:
+    // Không đi ngõ hẹp Z6-Z5 phía sau Nhà E1 khi vào E5 (ưu tiên trục hành lang chính E1 hoặc Đường Ánh Đạo)
+    if (endResolved === 'E5' || endId === 'E5' || endId === 'E5w' || endResolved === 'E5w') {
+        if (startId !== 'E10' && startId !== 'NHÀ E10' && startId !== 'A0') {
+            if (isZ6Z5) return true;
+        }
+    }
     if (isE8(endId)) {
-        if (isQR2) {
-            return true; // Chặn ngõ hẹp sau lưng E3/E4
+        // Không đi xuyên qua Nhà để xe PZ (trừ khi xuất phát từ chính Nhà để xe)
+        const isParking = (u === 'PZ' || v === 'PZ' || u === 'P*' || v === 'P*');
+        if (startId !== 'PZ' && startId !== 'P*' && isParking) return true;
+
+        // Từ E7 đi E8: đi thẳng theo trục Đường Sáng Tạo S1 -> S2 -> Q -> DN_NE -> R2 -> D3 -> X1 -> E8 (theo đúng bản vẽ người dùng)
+        // Cấm rẽ xuống H1 vòng qua Giảng đường Đa Năng
+        if (startId === 'E7' || startId === 'NHÀ E7' || startId === 'S1' || startId === 'S2') {
+            if (isH1S1) return true;
+        } else {
+            if (isQR2) {
+                return true; // Chặn ngõ hẹp sau lưng E3/E4
+            }
         }
         const startResolved = resolveAlias(startId);
         if (startResolved === 'E10' || startId === 'E10' || startId === 'NHÀ E10') {
@@ -687,6 +772,7 @@ function isEdgeRestricted(u, v, startId, endId, blockedSet, isMultiStop = false)
             }
         }
     }
+
 
     return false;
 }
@@ -851,6 +937,7 @@ function isEdgeBlocked(u, v, blockedSet) {
          (u === 'DN_SE' && v === 'H3') || (u === 'H3' && v === 'DN_SE'))) {
         return true;
     }
+
     return false;
 }
 
@@ -1415,7 +1502,7 @@ function findMultiStop(stops, blockedSet) {
         if (!seg || seg.length === 0) {
             const fromName = UTC2_NODES[from]?.name || from;
             const toName = UTC2_NODES[to]?.name || to;
-            return { error: `Không thể tìm thấy đường đi từ "${from} (${fromName})" đến "${to} (${toName})"! Vui lòng kiểm tra lại cạnh bị chặn.` };
+            return { error: `Không thể tìm thấy đường đi từ "${fromName}" đến "${toName}"! Vui lòng kiểm tra lại cạnh bị chặn.` };
         }
 
         totalDist += (d !== undefined && d < Infinity) ? d : calculatePathDistance(seg);
@@ -1444,7 +1531,7 @@ function findMultiStop(stops, blockedSet) {
     return {
         algorithm_used: algorithm,
         ordered_stops: bestOrder,
-        ordered_stop_names: bestOrder.map(id => `${id} (${UTC2_NODES[id]?.name || id})`),
+        ordered_stop_names: bestOrder.map(id => UTC2_NODES[id]?.name || id),
         total_distance: totalDist,
         walking_time_sec: walkSec,
         full_path: fullPath,
@@ -1837,7 +1924,7 @@ if (typeof module !== 'undefined' && module.exports) {
         GraphEngine,
         UTC2_NODES,
         UTC2_EDGES_RAW,
-        findShortestPath,
+        findShortestPath: (start, end, b) => GraphEngine.route(start, end, b),
         findMultiStop,
         solveTSP: (start, stops, b) => GraphEngine.solveTSP(start, stops, b),
         runTSP: (start, stops, b) => GraphEngine.solveTSP(start, stops, b),

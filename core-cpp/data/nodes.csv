@@ -2,14 +2,14 @@ id,name,description,x,y
 G,Cổng số 451,Điểm xuất phát chính (Đường Lê Văn Việt),200,980
 T,Ngã ba sau Cổng 451,Giao giữa Đại lộ Thành công và đường nhỏ dưới công viên,200,840
 J,Ngã tư dưới CV Thành công,Giao lối lên V1 và sang cụm C,430,840
-K,Nhà C2 (Sảnh sau),Phòng học C2 (Cửa Nam),580,840
-C2,Nhà C2,Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K),615,745
+K,Nhà C2 (Sảnh sau),Phòng học C2 (Cửa Nam),635,840
+C2,Nhà C2,Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K),635,745
 C1_J,Sảnh Tây Nhà C1,Khoảng sân giữa Nhà C2 và Nhà C1,780,840
 C1,Nhà C1,Điểm đón phía Đông Nhà C1 (Đường Hội Hộp),890,780
 C1_Front,Nhà C1 (Sảnh trước),Sảnh đón phía Tây Nhà C1 nối ngã ba V3,780,840
 C1_East,Đường hông C3 C1_East,Ngã ba đường nhựa hông C3,920,840
 V1,Đường nội bộ V1,Góc Tây-Bắc Nhà C2,430,745
-C2_Front,Nhà C2 (Sảnh trước),Cửa Bắc Nhà C2 nối đường nội bộ,615,745
+C2_Front,Nhà C2 (Sảnh trước),Cửa Bắc Nhà C2 nối đường nội bộ,635,745
 V5,Ngã ba tim đường V5,Ngã ba đường nội bộ trước C2 nối lên Đa năng,665,745
 V3,Đường nội bộ V3,Đường nội bộ trước C1 và C2,780,745
 V4,Ngã ba trước Nhà C3,Ngã ba Đường Hội Hộp và đường trước C2,920,745
@@ -37,15 +37,16 @@ E7,Nhà E7,Sảnh hành lang phía Tây Nhà E7 (cạnh Quảng trường 27/4),
 A2,Đường Ánh Đạo A2,Ngã ba tim đường Ánh Đạo đối diện Nhà E1,575,315
 E1,Nhà E1,Văn phòng Bộ môn,630,315
 XE,Đường dọc Công viên,Lối qua Công viên Nghĩa tình sang E10,410,110
-N1,Ngã ba N1,Lối rẽ từ sảnh Tây E7 lên Công viên Nghĩa tình,440,160
+N1,Ngã ba N1,Lối rẽ từ sảnh Tây E7 sang Đường Ánh Đạo,440,165
 E10,Nhà E10,Phòng học E10 (Cầu lát đá trước sảnh),410,85
 A0,Đường Ánh Đạo A0,Ngã tư đường Ánh Đạo và đường ngang mới E10-D0,575,85
 A1,Đường Ánh Đạo A1,Bùng binh phía Bắc đường Ánh Đạo,575,110
-E6_W,Nhà E6,Phòng học E6 (Lối Tây),640,85
+E6,Nhà E6,Phòng học E6,755,85
+E6_W,Nhà E6,Phòng học E6 (Lối Tây),755,85
 Z3,Hành lang Z3,Lối vào cửa Tây Nhà E3,705,440
 E3w,Nhà E3 (Tây),Phòng học E3 (Lối Tây),740,440
-Z4,Hành lang Z4,Lối vào cửa Tây Nhà E4,705,342
-E4w,Nhà E4 (Tây),Phòng học E4 (Lối Tây),740,342
+Z4,Hành lang Z4,Lối vào cửa Tây Nhà E4,705,315
+E4w,Nhà E4 (Tây),Phòng học E4 (Lối Tây),740,315
 Z5,Hành lang Z5,Lối vào cửa Tây Nhà E5,705,190
 E5w,Nhà E5 (Tây),Phòng học E5 (Lối Tây),740,190
 Z6,Hành lang Z6,Cửa đón đầu phía Bắc Nhà E1,705,85
@@ -54,7 +55,8 @@ D3,Nhà E3 (Đông),Phòng học E3 (Lối Đông),920,440
 D2,Nhà E4 (Đông),Phòng học E4 (Lối Đông),920,315
 X1,Ngã ba X1,Lối rẽ sang Nhà E8,920,342
 D1,Nhà E5 (Đông),Phòng học E5 (Lối Đông),920,190
-D0,Nhà E9,Phòng học E9,920,85
+D0,Ngã ba Đường Hạnh Hợp,Giao lộ phía Bắc Đường Hạnh Hợp,920,85
+E9,Nhà E9,Phòng học E9,920,85
 E1_North,Hành lang E1 (Bắc),Hành lang trong lòng Nhà E1 ngang Nhà E5,630,190
 E1_Mid,Nhà E1,Sảnh chính Nhà E1 ngang Nhà E4,630,315
 E1_South,Hành lang E1 (Nam),Hành lang trong lòng Nhà E1 ngang Nhà E3,630,440
@@ -62,6 +64,8 @@ E3,Nhà E3,Phòng học E3,740,440
 E4,Nhà E4,Phòng học E4,740,315
 E5,Nhà E5,Phòng học E5,740,190
 P_North,Lối Bắc Nhà để xe,Lối thông sau Nhà để xe sang Nhà E3,1040,440
+P_Road,Ngã ba đường sau Nhà để xe,Giao lộ đường sau Nhà xe và đường sang E8,1040,342
 DN_SE,Lối Đông Đa năng (Nam),Góc Đông-Nam Giảng đường Đa năng nối Đường Hội nhập,820,630
 DN_East,Giảng đường Đa năng (Lối Đông),Lối đi bộ hành lang phía Đông Giảng đường Đa năng,820,560
 DN_NE,Lối Đông Đa năng (Bắc),Góc Đông-Bắc Giảng đường Đa năng nối Đường Sáng tạo,820,492
+A_North,Đường Ánh Đạo (Bắc),Giao lộ Ánh Đạo ngang phía Bắc Nhà E7,575,175

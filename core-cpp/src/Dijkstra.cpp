@@ -161,6 +161,12 @@ namespace {
 
         // 1. Kịch bản Cụm C (C1, C2, C3, CT...): Tuyến chuẩn qua trục nội bộ C (T -> J)
         if (destIsClusterC || srcIsClusterC) {
+            bool isToC1 = (dest == "C1" || dest == "NHÀ C1" || dest == "HỘI TRƯỜNG C1" || dest == "C1_SANH");
+            bool isFromC1 = (src == "C1" || src == "NHÀ C1" || src == "HỘI TRƯỜNG C1" || src == "C1_SANH");
+            if (isToC1 || isFromC1) {
+                if ((u == "J" && v == "K") || (u == "K" && v == "J")) return true;
+                if ((u == "C1_Front" && v == "V3") || (u == "V3" && v == "C1_Front")) return true;
+            }
             if (isTW1) {
                 bool tjBlocked = blocked.isBlocked("T", "J");
                 if (!tjBlocked) return true; // Chặn T-W1 để bắt buộc đi tuyến nội bộ T -> J
@@ -195,6 +201,24 @@ namespace {
             if (isS1E7) {
                 return true; // Bắt buộc đi thẳng S1 -> S2
             }
+            if ((u == "E4w" && v == "E1_Mid") || (u == "E1_Mid" && v == "E4w")) {
+                return true; // Không đi xuyên qua hành lang Nhà E1
+            }
+        }
+        if (src == "E6" || src == "E6_W" || src == "NHÀ E6") {
+            if ((u == "E4w" && v == "E1_Mid") || (u == "E1_Mid" && v == "E4w")) {
+                return true;
+            }
+        }
+        if (dest == "E9" || dest == "NHÀ E9") {
+            if ((u == "E4w" && v == "E1_Mid") || (u == "E1_Mid" && v == "E4w")) {
+                return true;
+            }
+        }
+        if (src == "E9" || src == "NHÀ E9") {
+            if ((u == "E4w" && v == "E1_Mid") || (u == "E1_Mid" && v == "E4w")) {
+                return true;
+            }
         }
 
         // 5. Kịch bản các tòa nhà E Tây-Bắc khác (E7, E10):
@@ -220,6 +244,10 @@ namespace {
                 return true; // Đi qua hành lang bên trong E1, không ra khoảng sân ngoài trời bên hông hoặc đường xe
             }
         }
+        if (src == "E7" && (dest == "E1" || dest == "E1_Mid" || dest == "NHÀ E1")) {
+            bool isE7N1 = (u == "E7" && v == "N1") || (u == "N1" && v == "E7");
+            if (isE7N1) return true;
+        }
         if (isEWestNorth(dest) && (src == "G" || src == "T" || src == "W1")) {
             if (isW1H1) {
                 return true;
@@ -231,7 +259,26 @@ namespace {
         bool destIsEEast = isEastAxis(dest);
         bool isEBuilding = destIsEWest || destIsEEast || dest == "E3" || dest == "E4" || dest == "E5";
         if (isEBuilding) {
-            if (src == "G" || src == "T" || src == "W1" || src == "H1") {
+            if (src == "G" || src == "T" || src == "W1") {
+                if (isW1H1) return true;
+                if (isW2W3) return true;
+                if (isS1E7) return true;
+                if (isH3R2 || isQR2) return true;
+                if (isZ6Z5) return true;
+
+                bool isDestE4 = (dest == "E4" || dest == "E4w" || dest == "NHÀ E4");
+                bool isDestE5 = (dest == "E5" || dest == "E5w" || dest == "NHÀ E5");
+                bool isDestE3 = (dest == "E3" || dest == "E3w" || dest == "NHÀ E3");
+
+                if (isDestE4 || isDestE5) {
+                    if (isS2Q) return true;
+                    if ((u == "A2" && v == "A_North") || (u == "A_North" && v == "A2")) return true;
+                    if ((u == "Z4" && v == "Z5") || (u == "Z5" && v == "Z4")) return true;
+                } else if (isDestE3) {
+                    bool isA2E1Mid = (u == "A2" && (v == "E1_Mid" || v == "E1")) || (v == "A2" && (u == "E1_Mid" || u == "E1"));
+                    if (isA2E1Mid) return true;
+                }
+            } else if (src == "H1") {
                 if (destIsEWest) {
                     if (isW2S1) return true;
                     if (isH2S2) return true;
@@ -247,18 +294,35 @@ namespace {
             } else if (isClusterC(src) || src == "H2" || src == "DN") {
                 if (isQR2) return true;
                 if (isZ6Z5) return true;
-            } else {
+            } else if (src == "E10" || src == "NHÀ E10" || src == "A0" || src == "NGÃ TƯ A0") {
                 if (isS2Q || isA2S2) return true;
                 if (src == "E10" || src == "NHÀ E10") {
                     if (isXEE10 || isA0A1) return true;
+                    if ((u == "A0" && v == "D0") || (u == "D0" && v == "A0") ||
+                        (u == "E6" && v == "D0") || (u == "D0" && v == "E6")) return true;
                 }
             }
         }
 
+        if (dest == "E5" || dest == "NHÀ E5" || dest == "E5w") {
+            if (src != "E10" && src != "NHÀ E10" && src != "A0") {
+                if (isZ6Z5) return true;
+            }
+        }
         // 7. Kịch bản Nhà E8 / E8B:
         if (isE8(dest)) {
-            if (isQR2) {
-                return true; // Chặn ngõ hẹp sau lưng E3/E4
+            // Không đi xuyên qua Nhà để xe PZ (trừ khi xuất phát từ chính Nhà để xe)
+            bool isParking = (u == "PZ" || v == "PZ" || u == "P*" || v == "P*");
+            if (src != "PZ" && src != "P*" && isParking) return true;
+
+            // Từ E7 đi E8: đi thẳng theo trục Đường Sáng Tạo S1 -> S2 -> Q -> DN_NE -> R2 -> D3 -> X1 -> E8
+            // Cấm rẽ xuống H1 vòng qua Giảng đường Đa Năng
+            if (src == "E7" || src == "NHÀ E7" || src == "S1" || src == "S2") {
+                if (isH1S1) return true;
+            } else {
+                if (isQR2) {
+                    return true; // Chặn ngõ hẹp sau lưng E3/E4
+                }
             }
             if (src == "E10" || src == "NHÀ E10") {
                 if (isXEE10 || isA0A1 || isZ6Z5 || isA2A1) {
@@ -267,7 +331,7 @@ namespace {
             }
             if ((u == "X1" && (v == "D2" || v == "D1")) || (v == "X1" && (u == "D2" || u == "D1"))) {
                 bool isNorthSource = (src == "E10" || src == "NHÀ E10" || src == "D1" || src == "D0" || src == "E9" || src == "NHÀ E9" ||
-                                      src == "E6" || src == "E6_W" || src == "NHÀ E6" || src == "A0" || src == "A1");
+                                      src == "E6" || src == "E6_W" || src == "NHÀ E6" || src == "A0" || src == "A1" || src == "E6" || src == "E9");
                 if (!isNorthSource) {
                     return true; // Tuyệt đối không đi lố từ X1 lên D2/D1 rồi mới sang E8
                 }
@@ -280,6 +344,11 @@ namespace {
                     return true; // Tuyến từ Cổng phía Nam không đi qua D1
                 }
             }
+        }
+
+        if (isE8(src) && dest != "PZ" && dest != "P*") {
+            bool isParking = (u == "PZ" || v == "PZ" || u == "P*" || v == "P*");
+            if (isParking) return true;
         }
 
         return false;
@@ -587,9 +656,9 @@ void Dijkstra::resolveTarget(const std::string& dest,
     } else if (dest == "C1_WEST" || dest == "C1_Front" || dest == "C1_FRONT") {
         out1 = "C1_Front";
     } else if (dest == "E6" || dest == "NHÀ E6" || dest == "E6_W") {
-        out1 = "E6_W";
-    } else if (dest == "E9" || dest == "NHÀ E9") {
-        out1 = "D0";
+        out1 = "E6";
+    } else if (dest == "E9" || dest == "NHÀ E9" || dest == "D0") {
+        out1 = "E9";
     } else if (dest == "A0" || dest == "NGÃ TƯ A0") {
         out1 = "A0";
     } else if (dest == "Z6" || dest == "HÀNH LANG Z6") {
@@ -632,9 +701,9 @@ void Dijkstra::resolveOrigin(const std::string& src,
     } else if (src == "CT" || src == "CĂN TIN" || src == "CANTEEN" || src == "CĂN TIN SINH VIÊN") {
         out1 = "V4";
     } else if (src == "E6" || src == "NHÀ E6" || src == "E6_W") {
-        out1 = "E6_W";
-    } else if (src == "E9" || src == "NHÀ E9") {
-        out1 = "D0";
+        out1 = "E6";
+    } else if (src == "E9" || src == "NHÀ E9" || src == "D0") {
+        out1 = "E9";
     } else if (src == "A0" || src == "NGÃ TƯ A0") {
         out1 = "A0";
     } else if (src == "Z6" || src == "HÀNH LANG Z6") {
