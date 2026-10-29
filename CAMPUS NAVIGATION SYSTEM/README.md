@@ -1,62 +1,84 @@
-# HỆ THỐNG DẪN ĐƯỜNG KHUÔN VIÊN UTC2
-> **Bài tập lớn môn Cấu trúc Dữ liệu & Giải thuật (DSA)**  
-> **Trường Đại học Giao thông Vận tải - Phân hiệu tại TP. Hồ Chí Minh (UTC2)**
+# Hệ thống dẫn đường khuôn viên UTC2
 
----
+> Dự án môn Cấu trúc dữ liệu và Giải thuật (DSA) — Trường Đại học Giao thông Vận tải, Phân hiệu tại TP. Hồ Chí Minh.
 
-## 📌 Giới thiệu dự án
-Hệ thống dẫn đường thông minh hỗ trợ sinh viên, giảng viên và khách tham quan tìm kiếm lộ trình di chuyển tối ưu nhất trong khuôn viên UTC2 (450-451 Lê Văn Việt, TP. Thủ Đức). Hệ thống hỗ trợ tìm đường ngắn nhất, tự động chọn cửa vào tối ưu cho các tòa nhà có 2 lối vào (E3, E4, E5), né các đoạn đường đang bị chặn/thi công, và hiển thị lộ trình trực quan trên bản đồ tương tác.
+Ứng dụng hỗ trợ tra cứu đường đi trong khuôn viên UTC2. Người dùng có thể chọn điểm đi và điểm đến, xem tuyến đường trên bản đồ tương tác, tính lộ trình qua nhiều điểm, tránh các đoạn đường bị chặn và kiểm tra thời gian di chuyển giữa các lớp. Backend được viết bằng C++17 và cung cấp REST API cho giao diện web.
 
----
+## Tính năng
 
-## ⚙️ Công nghệ sử dụng
+- Tìm đường ngắn nhất bằng Dijkstra; tự chọn lối vào tối ưu cho một số tòa nhà có nhiều lối vào.
+- Hiển thị tuyến đường và thông tin quãng đường, thời gian đi bộ ước tính trên bản đồ web.
+- Tính tuyến đường qua nhiều điểm dừng.
+- Đánh dấu đường bị chặn và tìm tuyến thay thế.
+- Kiểm tra khả năng kịp giờ giữa hai lớp theo thời gian nghỉ.
+- Phục vụ giao diện web và dữ liệu bản đồ bằng máy chủ HTTP C++.
 
-1. **Lõi thuật toán & Web Server C++ thuần (`core-cpp/`):**
-   - **Đồ thị (Graph):** Biểu diễn bằng Danh sách kề (Adjacency List) sử dụng con trỏ thuần (`EdgeNode*`), hoàn toàn không dùng `std::vector` hay `std::list`. Quản lý bộ nhớ nghiêm ngặt theo **Rule of Three** chống rò rỉ bộ nhớ.
-   - **Hàng đợi ưu tiên (Min-Heap):** Tự cài đặt Min-Heap trên mảng động thuần, không sử dụng `std::priority_queue`.
-   - **Giải thuật Dijkstra:** Tìm đường đi ngắn nhất, hỗ trợ tập cạnh bị chặn (`BlockedEdgeList`) và tự động giải quyết tòa nhà 2 lối vào.
-   - **Dẫn đường & Đa điểm (Navigator):** Tìm lộ trình đa điểm ghé thăm nhiều trạm (Multi-stop TSP) với tối ưu hóa 2-Opt cục bộ, tự động sinh hướng dẫn Turn-by-turn bằng tích có hướng (Cross Product).
-   - **Tối ưu lịch học (Schedule Optimizer):** Cảnh báo nguy cơ trễ học giữa 2 tiết học kế tiếp.
-   - **So sánh hiệu năng (A* Heuristic & Benchmark):** So sánh tốc độ và số đỉnh duyệt giữa Dijkstra, A* và BFS.
-   - **Pure C++ Web Server (`core-cpp/server.cpp`):** Sử dụng thư viện header-only `httplib.h` (cpp-httplib) và `json.hpp` (nlohmann/json), phục vụ toàn bộ REST API và giao diện Web UI, loại bỏ hoàn toàn phụ thuộc vào Python.
+## Công nghệ
 
-2. **Giao diện Web tương tác (`web-ui/`):**
-   - HTML5 Canvas với đầy đủ tính năng phóng to/thu nhỏ (zoom), kéo rê (pan), chạm đa điểm trên mobile.
-   - Vẽ đường đi phát sáng (yellow glow) với hiệu ứng nét đứt chuyển động (marching dashes) và điểm đến nhấp nháy phát sáng.
+- **Backend:** C++17, [cpp-httplib](https://github.com/yhirose/cpp-httplib) và [nlohmann/json](https://github.com/nlohmann/json) (các header đã có trong `core-cpp/include/`).
+- **Frontend:** HTML, CSS và JavaScript thuần.
+- **Dữ liệu:** CSV cho đồ thị và JSON cho thông tin hiển thị của các địa điểm.
 
----
+## Yêu cầu
 
-## 🚀 Hướng dẫn khởi động đồ án (Dành cho chấm điểm BTL)
+- Windows và MinGW-w64 `g++` có trong biến môi trường `PATH`.
+- Trình duyệt web hiện đại.
 
-### Cách 1: Khởi động tự động bằng 1 cú click (Khuyên dùng trên Windows)
-1. **Bước 1:** Nhấp đúp chuột vào file **`run.bat`** tại thư mục gốc của đồ án.
-2. **Bước 2:** Hệ thống sẽ tự động biên dịch C++ Server bằng MinGW và mở trình duyệt tại:
-   ```
-   http://localhost:8080/
-   ```
+## Chạy ứng dụng
 
----
+Từ thư mục gốc dự án, chạy:
 
-### Cách 2: Khởi động thủ công bằng dòng lệnh
-
-**Bước 1: Biên dịch và chạy C++ Web Server**
-```powershell
-g++ -std=c++17 -D_WIN32_WINNT=0x0A00 -DCAMPUS_NAV_SERVER -O2 core-cpp/*.cpp core-cpp/src/*.cpp -I core-cpp/include -o campus_nav.exe -lws2_32
-.\campus_nav.exe 8080
+```bat
+run.bat
 ```
 
-**Bước 2: Mở giao diện Web**
-- Mở trình duyệt và truy cập: **`http://localhost:8080/`**
-- Hoặc mở trực tiếp file: **`web-ui/index.html`**
+Tập lệnh sẽ biên dịch backend, khởi động máy chủ tại cổng `8080` và mở trình duyệt. Nếu cổng này đang được sử dụng, hãy đóng tiến trình chiếm cổng hoặc đổi cổng trong lệnh chạy máy chủ.
 
----
+Có thể khởi động máy chủ đã biên dịch trực tiếp:
 
-## 🧪 Chạy kiểm thử tự động (Unit Tests)
-
-```powershell
-# 1. Chạy bộ kiểm thử C++ thuần Dijkstra & Cấu trúc dữ liệu
-.\tests\test_dijkstra.exe
-
-# 2. Chạy bộ kiểm thử các tính năng nâng cao (Multi-stop, Turn-by-turn, Schedule, A* Benchmark)
-.\tests\test_advanced.exe
+```bat
+campus_nav.exe 8080
 ```
+
+Sau khi máy chủ chạy:
+
+- Giao diện: <http://localhost:8080/>
+- Kiểm tra trạng thái và số lượng nút/cạnh: <http://localhost:8080/api/health>
+- Danh sách địa điểm: <http://localhost:8080/api/nodes>
+
+Máy chủ cần được chạy từ thư mục gốc dự án để tìm thấy thư mục `web-ui/` và dữ liệu trong `core-cpp/data/`.
+
+## Cấu trúc dự án
+
+```text
+.
+├── core-cpp/
+│   ├── data/                 # Dữ liệu nút và cạnh của đồ thị
+│   ├── include/              # Header, cpp-httplib và nlohmann/json
+│   ├── src/                  # Đồ thị, heap, thuật toán và điều hướng
+│   ├── server.cpp            # HTTP server và REST API
+│   ├── CMakeLists.txt
+│   └── Makefile
+├── tests/                    # Các chương trình kiểm thử C++
+├── web-ui/                   # Giao diện, CSS, JavaScript và tài nguyên
+├── nodes.json                # Dữ liệu địa điểm dùng cho giao diện
+├── run.bat                   # Biên dịch và chạy ứng dụng trên Windows
+├── ARCHITECTURE.md           # Mô tả kiến trúc
+└── PROJECT_CONTEXT.md        # Quy ước dữ liệu và yêu cầu của bài tập
+```
+
+## Dữ liệu bản đồ
+
+- `core-cpp/data/nodes.csv`: các nút của đồ thị, gồm mã, tên/mô tả và tọa độ.
+- `core-cpp/data/edges.csv`: các cạnh nối giữa nút, trọng số và loại đường.
+- `nodes.json`: thông tin địa điểm phục vụ giao diện; nếu không đọc được, backend có thể tạo danh sách từ đồ thị trong bộ nhớ.
+
+Khi chỉnh sửa bản đồ, hãy cập nhật dữ liệu đồ thị và dữ liệu giao diện tương ứng để tuyến đường và vị trí hiển thị đồng nhất.
+
+## Mã nguồn và đóng góp
+
+Các thuật toán đồ thị và cấu trúc dữ liệu được cài đặt trong `core-cpp/src/` và `core-cpp/include/`. Xem `ARCHITECTURE.md` để biết cách các thành phần phối hợp và `PROJECT_CONTEXT.md` để biết các quy ước riêng của dữ liệu UTC2.
+
+## Tác giả
+
+Dự án bài tập lớn môn Cấu trúc dữ liệu và Giải thuật tại UTC2.
