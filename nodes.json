@@ -1,0 +1,506 @@
+[
+  {
+    "id": "G",
+    "name": "Cổng số 451",
+    "description": "Điểm xuất phát chính (Đường Lê Văn Việt)",
+    "x": 200,
+    "y": 980
+  },
+  {
+    "id": "T",
+    "name": "Ngã ba sau Cổng 451",
+    "description": "Giao giữa Đại lộ Thành công và đường nhỏ dưới công viên",
+    "x": 200,
+    "y": 840
+  },
+  {
+    "id": "J",
+    "name": "Ngã tư dưới CV Thành công",
+    "description": "Giao lối lên V1 và sang cụm C",
+    "x": 430,
+    "y": 840
+  },
+  {
+    "id": "K",
+    "name": "Nhà C2 (Sảnh sau)",
+    "description": "Phòng học C2 (Cửa Nam)",
+    "x": 635,
+    "y": 840
+  },
+  {
+    "id": "C2",
+    "name": "Nhà C2",
+    "description": "Phòng học C2 (Sảnh trước C2_Front / Sảnh sau K)",
+    "x": 635,
+    "y": 745
+  },
+  {
+    "id": "C1_J",
+    "name": "Sảnh Tây Nhà C1",
+    "description": "Khoảng sân giữa Nhà C2 và Nhà C1",
+    "x": 780,
+    "y": 840
+  },
+  {
+    "id": "C1",
+    "name": "Nhà C1",
+    "description": "Điểm đón phía Đông Nhà C1 (Đường Hội Hộp)",
+    "x": 890,
+    "y": 780
+  },
+  {
+    "id": "C1_Front",
+    "name": "Nhà C1 (Sảnh trước)",
+    "description": "Sảnh đón phía Tây Nhà C1 nối ngã ba V3",
+    "x": 780,
+    "y": 840
+  },
+  {
+    "id": "C1_East",
+    "name": "Đường hông C3 C1_East",
+    "description": "Ngã ba đường nhựa hông C3",
+    "x": 920,
+    "y": 840
+  },
+  {
+    "id": "V1",
+    "name": "Đường nội bộ V1",
+    "description": "Góc Tây-Bắc Nhà C2",
+    "x": 430,
+    "y": 745
+  },
+  {
+    "id": "C2_Front",
+    "name": "Nhà C2 (Sảnh trước)",
+    "description": "Cửa Bắc Nhà C2 nối đường nội bộ",
+    "x": 635,
+    "y": 745
+  },
+  {
+    "id": "V5",
+    "name": "Ngã ba tim đường V5",
+    "description": "Ngã ba đường nội bộ trước C2 nối lên Đa năng",
+    "x": 665,
+    "y": 745
+  },
+  {
+    "id": "V3",
+    "name": "Đường nội bộ V3",
+    "description": "Đường nội bộ trước C1 và C2",
+    "x": 780,
+    "y": 745
+  },
+  {
+    "id": "V4",
+    "name": "Ngã ba trước Nhà C3",
+    "description": "Ngã ba Đường Hội Hộp và đường trước C2",
+    "x": 920,
+    "y": 745
+  },
+  {
+    "id": "V4_S",
+    "name": "Nhà C3 (Điểm đón V4_S)",
+    "description": "Điểm đón phía dưới của Nhà C3",
+    "x": 920,
+    "y": 840
+  },
+  {
+    "id": "C3",
+    "name": "Nhà C3",
+    "description": "Trung tâm TT Thư viện & Phòng khảo thí",
+    "x": 970,
+    "y": 710
+  },
+  {
+    "id": "CT",
+    "name": "Căn tin",
+    "description": "Khu dịch vụ ăn uống",
+    "x": 920,
+    "y": 710
+  },
+  {
+    "id": "H1",
+    "name": "Đường Hội nhập H1",
+    "description": "Giao đường nội bộ phía Tây",
+    "x": 405,
+    "y": 630
+  },
+  {
+    "id": "H2",
+    "name": "Đường Hội nhập H2",
+    "description": "Ngã tư đường Hội nhập trước Giảng đường Đa năng",
+    "x": 665,
+    "y": 630
+  },
+  {
+    "id": "DN",
+    "name": "Giảng đường Đa năng",
+    "description": "Sảnh chính Giảng đường Đa năng",
+    "x": 665,
+    "y": 600
+  },
+  {
+    "id": "H3",
+    "name": "Đường Hội nhập H3",
+    "description": "Giao lối lên trục Đông cụm E",
+    "x": 920,
+    "y": 630
+  },
+  {
+    "id": "HP",
+    "name": "Đường Hội nhập HP",
+    "description": "Tim đường Hội nhập trước cửa Nhà để xe",
+    "x": 1040,
+    "y": 630
+  },
+  {
+    "id": "P*",
+    "name": "Nhà để xe",
+    "description": "Khu để xe máy / ô tô",
+    "x": 1040,
+    "y": 560
+  },
+  {
+    "id": "PZ",
+    "name": "Nhà để xe",
+    "description": "Khu để xe máy / ô tô",
+    "x": 1040,
+    "y": 560
+  },
+  {
+    "id": "HE8B",
+    "name": "Đường Hội nhập E8B",
+    "description": "Tim đường Hội nhập trước sảnh E8B",
+    "x": 1225,
+    "y": 630
+  },
+  {
+    "id": "E8B",
+    "name": "Nhà E8B",
+    "description": "Phòng thí nghiệm PTC-UTC2",
+    "x": 1225,
+    "y": 590
+  },
+  {
+    "id": "E8",
+    "name": "Nhà E8",
+    "description": "Phòng thí nghiệm & Xưởng thực tập",
+    "x": 1130,
+    "y": 342
+  },
+  {
+    "id": "W1",
+    "name": "Đại lộ Thành công W1",
+    "description": "Giao đường Hội nhập",
+    "x": 200,
+    "y": 630
+  },
+  {
+    "id": "W2",
+    "name": "Đại lộ Thành công W2",
+    "description": "Giao đường Sáng tạo",
+    "x": 200,
+    "y": 492
+  },
+  {
+    "id": "W3",
+    "name": "Đại lộ Thành công W3",
+    "description": "Cạnh Quảng trường 27/4 đối diện E7",
+    "x": 200,
+    "y": 315
+  },
+  {
+    "id": "W4",
+    "name": "Đại lộ Thành công W4",
+    "description": "Phía trên Quảng trường 27/4",
+    "x": 200,
+    "y": 110
+  },
+  {
+    "id": "S1",
+    "name": "Đường Sáng tạo S1",
+    "description": "Góc Đường Sáng Tạo hông Tây E7",
+    "x": 440,
+    "y": 492
+  },
+  {
+    "id": "S2",
+    "name": "Đường Sáng tạo S2",
+    "description": "Giao đường Ánh Đạo",
+    "x": 575,
+    "y": 492
+  },
+  {
+    "id": "Q",
+    "name": "Đường Sáng tạo Q",
+    "description": "Góc quay dưới chân Nhà E3",
+    "x": 705,
+    "y": 492
+  },
+  {
+    "id": "E7",
+    "name": "Nhà E7",
+    "description": "Sảnh hành lang phía Tây Nhà E7 (cạnh Quảng trường 27/4)",
+    "x": 440,
+    "y": 315
+  },
+  {
+    "id": "A2",
+    "name": "Đường Ánh Đạo A2",
+    "description": "Ngã ba tim đường Ánh Đạo đối diện Nhà E1",
+    "x": 575,
+    "y": 315
+  },
+  {
+    "id": "E1",
+    "name": "Nhà E1",
+    "description": "Văn phòng Bộ môn",
+    "x": 630,
+    "y": 315
+  },
+  {
+    "id": "XE",
+    "name": "Đường dọc Công viên",
+    "description": "Lối qua Công viên Nghĩa tình sang E10",
+    "x": 410,
+    "y": 110
+  },
+  {
+    "id": "N1",
+    "name": "Ngã ba N1",
+    "description": "Lối rẽ từ sảnh Tây E7 sang Đường Ánh Đạo",
+    "x": 440,
+    "y": 165
+  },
+  {
+    "id": "E10",
+    "name": "Nhà E10",
+    "description": "Phòng học E10 (Cầu lát đá trước sảnh)",
+    "x": 410,
+    "y": 85
+  },
+  {
+    "id": "A0",
+    "name": "Đường Ánh Đạo A0",
+    "description": "Ngã tư đường Ánh Đạo và đường ngang mới E10-D0",
+    "x": 575,
+    "y": 85
+  },
+  {
+    "id": "A1",
+    "name": "Đường Ánh Đạo A1",
+    "description": "Bùng binh phía Bắc đường Ánh Đạo",
+    "x": 575,
+    "y": 110
+  },
+  {
+    "id": "E6_W",
+    "name": "Nhà E6",
+    "description": "Phòng học E6 (Lối Tây)",
+    "x": 755,
+    "y": 85
+  },
+  {
+    "id": "Z3",
+    "name": "Hành lang Z3",
+    "description": "Lối vào cửa Tây Nhà E3",
+    "x": 705,
+    "y": 440
+  },
+  {
+    "id": "E3w",
+    "name": "Nhà E3 (Tây)",
+    "description": "Phòng học E3 (Lối Tây)",
+    "x": 740,
+    "y": 440
+  },
+  {
+    "id": "Z4",
+    "name": "Hành lang Z4",
+    "description": "Lối vào cửa Tây Nhà E4",
+    "x": 705,
+    "y": 315
+  },
+  {
+    "id": "E4w",
+    "name": "Nhà E4 (Tây)",
+    "description": "Phòng học E4 (Lối Tây)",
+    "x": 740,
+    "y": 315
+  },
+  {
+    "id": "Z5",
+    "name": "Hành lang Z5",
+    "description": "Lối vào cửa Tây Nhà E5",
+    "x": 705,
+    "y": 190
+  },
+  {
+    "id": "E5w",
+    "name": "Nhà E5 (Tây)",
+    "description": "Phòng học E5 (Lối Tây)",
+    "x": 740,
+    "y": 190
+  },
+  {
+    "id": "Z6",
+    "name": "Hành lang Z6",
+    "description": "Cửa đón đầu phía Bắc Nhà E1",
+    "x": 705,
+    "y": 85
+  },
+  {
+    "id": "R2",
+    "name": "Đường sau Nhà xe R2",
+    "description": "Lối vào trục nội bộ phía Đông",
+    "x": 920,
+    "y": 492
+  },
+  {
+    "id": "D3",
+    "name": "Nhà E3 (Đông)",
+    "description": "Phòng học E3 (Lối Đông)",
+    "x": 920,
+    "y": 440
+  },
+  {
+    "id": "D2",
+    "name": "Nhà E4 (Đông)",
+    "description": "Phòng học E4 (Lối Đông)",
+    "x": 920,
+    "y": 315
+  },
+  {
+    "id": "X1",
+    "name": "Ngã ba X1",
+    "description": "Lối rẽ sang Nhà E8",
+    "x": 920,
+    "y": 342
+  },
+  {
+    "id": "D1",
+    "name": "Nhà E5 (Đông)",
+    "description": "Phòng học E5 (Lối Đông)",
+    "x": 920,
+    "y": 190
+  },
+  {
+    "id": "D0",
+    "name": "Nhà E9",
+    "description": "Phòng học E9",
+    "x": 920,
+    "y": 85
+  },
+  {
+    "id": "E1_North",
+    "name": "Hành lang E1 (Bắc)",
+    "description": "Hành lang trong lòng Nhà E1 ngang Nhà E5",
+    "x": 630,
+    "y": 190
+  },
+  {
+    "id": "E1_Mid",
+    "name": "Nhà E1",
+    "description": "Sảnh chính Nhà E1 ngang Nhà E4",
+    "x": 630,
+    "y": 315
+  },
+  {
+    "id": "E1_South",
+    "name": "Hành lang E1 (Nam)",
+    "description": "Hành lang trong lòng Nhà E1 ngang Nhà E3",
+    "x": 630,
+    "y": 440
+  },
+  {
+    "id": "E3",
+    "name": "Nhà E3",
+    "description": "Phòng học E3",
+    "x": 740,
+    "y": 440
+  },
+  {
+    "id": "E4",
+    "name": "Nhà E4",
+    "description": "Phòng học E4",
+    "x": 740,
+    "y": 315
+  },
+  {
+    "id": "E5",
+    "name": "Nhà E5",
+    "description": "Phòng học E5",
+    "x": 740,
+    "y": 190
+  },
+  {
+    "id": "P_North",
+    "name": "Lối Bắc Nhà để xe",
+    "description": "Lối thông sau Nhà để xe sang Nhà E3",
+    "x": 1040,
+    "y": 440
+  },
+  {
+    "id": "DN_SE",
+    "name": "Lối Đông Đa năng (Nam)",
+    "description": "Góc Đông-Nam Giảng đường Đa năng nối Đường Hội nhập",
+    "x": 820,
+    "y": 630
+  },
+  {
+    "id": "DN_East",
+    "name": "Giảng đường Đa năng (Lối Đông)",
+    "description": "Lối đi bộ hành lang phía Đông Giảng đường Đa năng",
+    "x": 820,
+    "y": 560
+  },
+  {
+    "id": "DN_NE",
+    "name": "Lối Đông Đa năng (Bắc)",
+    "description": "Góc Đông-Bắc Giảng đường Đa năng nối Đường Sáng tạo",
+    "x": 820,
+    "y": 492
+  },
+  {
+    "id": "E6",
+    "name": "Nhà E6",
+    "description": "Phòng học E6 (Giữa tòa nhà)",
+    "x": 755,
+    "y": 85
+  },
+  {
+    "id": "E9",
+    "name": "Nhà E9",
+    "description": "Phòng học E9 (Giữa tòa nhà)",
+    "x": 920,
+    "y": 85
+  },
+  {
+    "id": "E6_Front",
+    "name": "Lối vào Nhà E6",
+    "description": "Lối vào sảnh Nhà E6",
+    "x": 755,
+    "y": 85
+  },
+  {
+    "id": "E9_Front",
+    "name": "Lối vào Nhà E9",
+    "description": "Lối vào sảnh Nhà E9",
+    "x": 1060,
+    "y": 85
+  },
+  {
+    "id": "P_Road",
+    "name": "Ngã ba đường sau Nhà để xe",
+    "description": "Giao lộ đường sau Nhà xe và đường sang E8",
+    "x": 1040,
+    "y": 342
+  },
+  {
+    "id": "A_North",
+    "name": "Đường Ánh Đạo (Bắc)",
+    "description": "Giao lộ Ánh Đạo ngang phía Bắc Nhà E7",
+    "x": 575,
+    "y": 175
+  }
+]
