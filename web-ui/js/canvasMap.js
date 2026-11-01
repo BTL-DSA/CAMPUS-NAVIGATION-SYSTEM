@@ -169,14 +169,14 @@ class CanvasMap {
     }
 
     /**
-     * Tỷ lệ scale tối thiểu để ảnh bản đồ luôn phủ kín 100% khung nhìn canvas,
-     * ngăn chặn hoàn toàn việc thu nhỏ quá mức làm lộ khoảng màu đen.
+     * Tỷ lệ scale tối thiểu để nhìn được toàn bộ bản đồ (fit toàn cảnh 100% không bị khuất mép nào),
+     * đồng thời khóa không cho phép thu nhỏ hơn mức này.
      */
     getMinScale() {
         if (!this.imageLoaded || !this.mapImage.width || !this.mapImage.height) return 0.5;
         const scaleX = this.canvas.width / this.mapImage.width;
         const scaleY = this.canvas.height / this.mapImage.height;
-        return Math.max(scaleX, scaleY);
+        return Math.min(scaleX, scaleY);
     }
 
     /**
@@ -210,9 +210,20 @@ class CanvasMap {
     }
 
     resizeCanvas() {
+        if (!this.canvas || !this.canvas.parentElement) return;
         const rect = this.canvas.parentElement.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const prevMinScale = this.minScale;
+        const wasAtMinScale = Math.abs(this.scale - prevMinScale) < 0.01;
+
         this.canvas.width = rect.width;
         this.canvas.height = rect.height;
+
+        if (wasAtMinScale) {
+            this.scale = this.getMinScale();
+            this.offsetX = (this.canvas.width - this.mapImage.width * this.scale) / 2;
+            this.offsetY = (this.canvas.height - this.mapImage.height * this.scale) / 2;
+        }
         this.clampOffsets();
         this.render();
     }
@@ -297,6 +308,7 @@ class CanvasMap {
             if (e.touches.length === 1 && this.isDragging) {
                 this.offsetX = e.touches[0].clientX - this.dragStartX;
                 this.offsetY = e.touches[0].clientY - this.dragStartY;
+                this.clampOffsets();
                 this.render();
             } else if (e.touches.length === 2 && initialDistance > 0) {
                 const dist = Math.hypot(
@@ -362,7 +374,8 @@ class CanvasMap {
 
         const scaleX = this.canvas.width / routeW;
         const scaleY = this.canvas.height / routeH;
-        this.scale = Math.min(scaleX, scaleY, 1.8);
+        const minScale = this.getMinScale();
+        this.scale = Math.max(Math.min(scaleX, scaleY, 1.8), minScale);
 
         const centerX = (minX + maxX) / 2;
         const centerY = (minY + maxY) / 2;
@@ -370,6 +383,7 @@ class CanvasMap {
         this.offsetX = this.canvas.width / 2 - centerX * this.scale;
         this.offsetY = this.canvas.height / 2 - centerY * this.scale;
 
+        this.clampOffsets();
         this.render();
     }
 
