@@ -219,3 +219,4 @@ Thư mục `tests/` chứa các chương trình kiểm thử cho heap, Dijkstra 
 ## Tác giả
 
 Dự án bài tập lớn môn Cấu trúc dữ liệu và Giải thuật tại UTC2.
+Nguyễn Thanh Tâm - 6651071066git add .
