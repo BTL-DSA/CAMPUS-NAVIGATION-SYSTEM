@@ -219,4 +219,8 @@ Thư mục `tests/` chứa các chương trình kiểm thử cho heap, Dijkstra 
 ## Tác giả
 
 Dự án bài tập lớn môn Cấu trúc dữ liệu và Giải thuật tại UTC2.
-Nguyễn Thanh Tâm - 6651071066git add .
+Nguyễn Thanh Tâm - 6651071066
+Nguyễn Phúc Khai Tâm - 6651071065
+Nguyễn Trần Trung Tính - 6651071078
+Lê Hồng Ngọc Quý - 6651071058
+Nguyễn Phạm Huy Hoàng - 6651071024
