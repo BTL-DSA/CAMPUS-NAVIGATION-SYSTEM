@@ -25,7 +25,7 @@
 - Tạo lộ trình qua nhiều điểm dừng theo thứ tự đầu vào.
 - Đánh dấu các đoạn đường bị chặn để tìm tuyến thay thế.
 - Kiểm tra người dùng có đủ thời gian đi từ phòng học tiết trước đến phòng học tiết sau hay không.
-- So sánh Dijkstra, A* và BFS qua API benchmark.
+- So sánh Dijkstra, A\* và BFS qua API benchmark.
 - Phục vụ giao diện web và REST API từ máy chủ HTTP C++.
 
 ## Công nghệ và thuật toán
@@ -34,7 +34,7 @@
 - **Frontend:** HTML, CSS và JavaScript thuần; bản đồ được hiển thị bằng canvas.
 - **Đồ thị:** Danh sách kề tự cài đặt bằng con trỏ; trọng số cạnh biểu diễn khoảng cách.
 - **Cấu trúc dữ liệu:** Min-heap tự cài đặt.
-- **Thuật toán:** Dijkstra, A*, BFS; các phần điều hướng và tối ưu lịch học nằm trong `core-cpp/src/`.
+- **Thuật toán:** Dijkstra, A\*, BFS; các phần điều hướng và tối ưu lịch học nằm trong `core-cpp/src/`.
 - **Dữ liệu:** CSV cho đồ thị và JSON cho thông tin địa điểm trên giao diện.
 
 ## Yêu cầu
@@ -174,7 +174,7 @@ curl -X POST "http://localhost:8080/api/schedule-check" \
 curl "http://localhost:8080/api/benchmark?start=G&end=E3"
 ```
 
-Endpoint trả về khoảng cách, số đỉnh đã duyệt và thời gian chạy của Dijkstra, A* và BFS. BFS tối ưu số cạnh, không tối ưu theo khoảng cách thực tế.
+Endpoint trả về khoảng cách, số đỉnh đã duyệt và thời gian chạy của Dijkstra, A\* và BFS. BFS tối ưu số cạnh, không tối ưu theo khoảng cách thực tế.
 
 ## Dữ liệu bản đồ
 
@@ -219,8 +219,9 @@ Thư mục `tests/` chứa các chương trình kiểm thử cho heap, Dijkstra 
 ## Tác giả
 
 Dự án bài tập lớn môn Cấu trúc dữ liệu và Giải thuật tại UTC2.
-Nguyễn Thanh Tâm - 6651071066
-Nguyễn Phúc Khai Tâm - 6651071065
-Nguyễn Trần Trung Tính - 6651071078
-Lê Hồng Ngọc Quý - 6651071058
-Nguyễn Phạm Huy Hoàng - 6651071024
+
+- Nguyễn Thanh Tâm - 6651071066
+- Nguyễn Phúc Khai Tâm - 6651071065
+- Nguyễn Trần Trung Tính - 6651071078
+- Lê Hồng Ngọc Quý - 6651071058
+- Nguyễn Phạm Huy Hoàng - 6651071024
